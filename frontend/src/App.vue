@@ -12,7 +12,7 @@
         <div><router-link v-if="!$root.user" to="/signin">Sign in</router-link></div>
       </div>
     </div>
-    <div id="navSignedIn">
+    <div v-if="$root.user" id="navSignedIn">
       <div>
         <p v-if="$root.user" class="logo">FriendTimacy</p>
       </div>
