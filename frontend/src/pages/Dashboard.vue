@@ -1,15 +1,15 @@
 <template>
   <div v-if="$root.user" class="dashboard">
     <div class="panel">
-      <button @click="sortingCategory = 1" :class="{activeButton: sortingCategory==1}">Friends</button>
-      <button @click="sortingCategory = 2" :class="{activeButton: sortingCategory==2}">Family</button>
-      <button @click="sortingCategory = 3" :class="{activeButton: sortingCategory==3}">Work</button>
+      <button @click="sortingCategory = 1" :class="{activeButton: sortingCategory==1}">Family</button>
+      <button @click="sortingCategory = 2" :class="{activeButton: sortingCategory==2}">Work</button>
+      <button @click="sortingCategory = 3" :class="{activeButton: sortingCategory==3}">Friends</button>
       <button @click="sortingCategory = 4" :class="{activeButton: sortingCategory==4}">All</button>
       <button  @click="openModal" title="Add friend"><img class="plus" src='../assets/plus-solid.svg'></button>
     </div>
-    <div v-if="modalIsOpen==true && !isSubmitted" class="greyLayer">
+    <div @click="closeModal" v-if="modalIsOpen==true" class="greyLayer">
     </div>
-    <div v-if="modalIsOpen==true && !isSubmitted" class="modalContainer">
+    <div v-if="modalIsOpen==true" class="modalContainer">
       <div class="modal">
         <input type="text" v-model="firstName" placeholder="First name">
         <input type="text" v-model="lastName" placeholder="Last name">
@@ -30,7 +30,6 @@
       <div @click="goToFriend(friend)" v-for="friend in $root.friends" v-if="friend.category_fk==sortingCategory || sortingCategory==4" class="friendContainer">
         <img :src="friend.image_url">
         <div class="name">{{friend.first_name}} {{friend.last_name}}</div>
-        <div>blahjgjyfkgvhj</div>
       </div>
     </div>
   </div>
@@ -49,7 +48,6 @@ export default {
       phoneNumber:'',
       workplace:'',
       category: 1,
-      isSubmitted: false,
       sortingCategory: 4
     }
   },
@@ -79,7 +77,10 @@ export default {
     openModal(){
       this.modalIsOpen=true
     },
-  addFriend(){
+    closeModal(){
+      this.modalIsOpen=false
+    },
+    addFriend(){
       let formData = new FormData()
       formData.append('firstName', this.firstName)
       formData.append('lastName', this.lastName)
@@ -95,7 +96,7 @@ export default {
       })
       .then(res => res.json())
       .then(json => {
-        this.isSubmitted=true
+        this.closeModal()
         this.getAllFriends()
         console.log(json)
       }).catch(error => {
@@ -115,32 +116,41 @@ export default {
   display flex
   flex-direction row
   justify-content space-between
+  align-items flex-start
 
   button
     border none
     background transparent
     cursor pointer
     outline none
-
-  .activeButton
-    text-decoration underline
+    font-family 'Poppins', sans-serif
+    font-size 14px
+    margin-bottom 5px
+    text-transform uppercase
+    color #565051
 
     .plus
       width 20px
+
+  .activeButton
+    border-bottom 5px solid brandGreen
 
 .dashboardInner
   z-index 0
   display flex
   flex-direction column
   width 700px
+  background-color white
+  padding-top 20px
+  box-shadow 3px 6px 19px -10px #ccc
 
 .friendContainer
   display flex
   flex-direction row
   align-items center
   padding-bottom 20px
-  padding-left 70px
   cursor pointer
+  padding-left 30%
 
   img
     width 80px
@@ -174,12 +184,14 @@ export default {
   padding 50px
   background-color tint(brandPink,90%)
   position fixed
-  left 300px
-  width 500px
-  overflow auto
-  height 70vh
+  width 600px
+  overflow hidden
+  height 55vh
+  top 120px
+  border-radius 25px
+  box-shadow 3px 6px 19px -10px brandPink
 
-  input
+  input, select
     padding 15px
     width 200px
     margin-bottom 30px
@@ -190,10 +202,12 @@ export default {
     box-shadow 3px 6px 19px -10px #ccc
     color #565051
 
+  select
+    margin-right 10px
+
   button
     padding 15px
     margin-bottom 20px
-    // border-radius 25px
     background-color transparent
     border none
     color #565051

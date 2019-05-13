@@ -61,27 +61,23 @@ $address = $_POST['address'] ?? '';
 //PHONE NUMBER/S
 $phoneNumber = $_POST['phoneNumber'] ?? '';
 
-//IMAGE_URL ?
-$imageURL = $_POST['imageURL'] ?? '';
-
 //WORKPLACE
 $workplace = $_POST['workplace'] ?? '';
 
 //CATEGORY
-$category = $_POST['category'];
+$category = $_POST['category'] ?? 1;
 
 
   $stmt = $db->prepare('SELECT * FROM friends WHERE id = :friendID');
   $stmt->bindValue(':friendID', $friendID);
 
 
-  $stmt = $db->prepare('INSERT INTO friends VALUES(null, :userID, :category, :firstName, :lastName, :birthday, :imageURL, :phoneNumber, :workplace, :email, :friendAddress, "" )');
-  $stmt->bindValue(':userID', $userID);
+  $stmt = $db->prepare('UPDATE friends SET category_fk=:category, first_name=:firstName, last_name=:lastName, birthdate=:birthday, phone_number=:phoneNumber, workplace=:workplace, email=:email, address=:friendAddress WHERE id = :friendID');
+  $stmt->bindValue(':friendID', $friendID);
   $stmt->bindValue(':category', $category);
   $stmt->bindValue(':firstName', $firstName);
   $stmt->bindValue(':lastName', $lastName);
   $stmt->bindValue(':birthday', $birthday);
-  $stmt->bindValue(':imageURL', $imageURL);
   $stmt->bindValue(':phoneNumber', $phoneNumber);
   $stmt->bindValue(':workplace', $workplace);
   $stmt->bindValue(':email', $email);
