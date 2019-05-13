@@ -1,28 +1,22 @@
 <template>
   <div id="app">
     <div v-if="this.$route.name !== 'signin'" class="topRightBlob1"></div>
-    <!-- <svg
-  width="600"
-  height="600"
-  viewBox="0 0 600 600"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <g transform="translate(300,300)">
-    <path d="M127.9,-205.3C153.1,-182.8,152,-125.9,173.7,-79.1C195.4,-32.4,239.7,4.2,228,27.4C216.3,50.6,148.6,60.3,115.2,101C81.8,141.7,82.7,213.3,61.1,229.3C39.5,245.3,-4.6,205.7,-55.5,190.1C-106.3,174.6,-163.9,183.2,-177.7,158.7C-191.5,134.2,-161.6,76.6,-162.4,27.4C-163.3,-21.9,-194.9,-62.6,-196.2,-102C-197.5,-141.3,-168.5,-179.2,-130.7,-195.9C-93,-212.7,-46.5,-208.3,2.4,-212.1C51.4,-215.9,102.7,-227.8,127.9,-205.3Z" fill="#eab0a2" />
-  </g>
-</svg> -->
     <div v-if="this.$route.name !== 'signin'" class="topRightBlob2"></div>
-    <div id="nav">
+    <div v-if="!$root.user" id="navSignedOut">
       <div>
         <router-link v-if="!$root.user" to="/"><p class="logo">FriendTimacy</p></router-link>
-        <p v-if="$root.user" class="logo">FriendTimacy</p>
       </div>
       <div v-if="!$root.user" class="navRight">
         <div><router-link v-if="!$root.user" to="/aboutus">About us</router-link></div>
         <div><router-link v-if="!$root.user" to="/signup">Sign up</router-link></div>
         <div><router-link v-if="!$root.user" to="/signin">Sign in</router-link></div>
       </div>
-      <div v-if="$root.user" class="navSignedIn">
+    </div>
+    <div id="navSignedIn">
+      <div>
+        <p v-if="$root.user" class="logo">FriendTimacy</p>
+      </div>
+      <div v-if="$root.user" class="navRightSignedIn">
         <div><router-link v-if="$root.user && $route.name=='friend'" to="/dashboard">Dashboard</router-link></div>
         <div v-if="$root.user" @click="signout"><router-link to="/">Sign out</router-link></div>
       </div>
@@ -88,7 +82,7 @@ body
   align-items center
   margin 0px 40px 20px 40px
 
-#nav
+#navSignedOut
   display flex
   align-items center
   z-index 3
@@ -106,6 +100,34 @@ body
     text-decoration none
     &.router-link-exact-active
       color brandGreen
+
+#navSignedIn
+  display flex
+  flex-direction row
+  align-items flex-end
+  z-index 3
+  width 90%
+  padding-top 35px
+  padding-bottom 30px
+  font-size 14px
+
+  div
+    width 50%
+
+    a
+      color brandGrey
+      text-decoration none
+
+      &.router-link-exact-active
+        color brandGreen
+
+  .navRightSignedIn
+    display flex
+    flex-direction row
+    justify-content flex-end
+
+    div
+      text-align right
 
 .logo
   color brandPink
