@@ -170,24 +170,24 @@ export default {
   height 100%
   background-color black
   opacity 0.7
-  z-index 1
+  z-index 4
 
 .modalContainer
-  z-index 2
+  z-index 5
 
 .modal
-  z-index 2
+  z-index 5
   display flex
   flex-flow row wrap
   align-items center
   justify-content space-around
-  padding 50px
+  padding 40px
   background-color tint(brandPink,90%)
   position fixed
   width 600px
-  overflow hidden
-  height 55vh
-  top 120px
+  overflow auto
+  height 70vh
+  top 60px
   border-radius 25px
   box-shadow 3px 6px 19px -10px brandPink
 

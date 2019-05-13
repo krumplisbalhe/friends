@@ -13,12 +13,17 @@
 </svg> -->
     <div v-if="this.$route.name !== 'signin'" class="topRightBlob2"></div>
     <div id="nav">
-      {{$root.user}}
-      <div><router-link to="/"><p class="logo">FriendTimacy</p></router-link></div>
-      <div class="navRight">
-        <div v-if="!$root.user"><router-link to="/aboutus">About us</router-link></div>
-        <div v-if="!$root.user"><router-link to="/signup">Sign up</router-link></div>
-        <div v-if="!$root.user"><router-link to="/signin">Sign in</router-link></div>
+      <div>
+        <router-link v-if="!$root.user" to="/"><p class="logo">FriendTimacy</p></router-link>
+        <p v-if="$root.user" class="logo">FriendTimacy</p>
+      </div>
+      <div v-if="!$root.user" class="navRight">
+        <div><router-link v-if="!$root.user" to="/aboutus">About us</router-link></div>
+        <div><router-link v-if="!$root.user" to="/signup">Sign up</router-link></div>
+        <div><router-link v-if="!$root.user" to="/signin">Sign in</router-link></div>
+      </div>
+      <div v-if="$root.user" class="navSignedIn">
+        <div><router-link v-if="$root.user && $route.name=='friend'" to="/dashboard">Dashboard</router-link></div>
         <div v-if="$root.user" @click="signout"><router-link to="/">Sign out</router-link></div>
       </div>
     </div>
@@ -62,31 +67,6 @@ export default {
         console.log(error)
       })
     }
-    // getServerStuff () {
-    //   fetch('http://localhost:8080/friends/backend/api/test.php')
-    //   .then(res => res.json())
-    //   .then(json => {
-    //     this.$root.serverStuff = json
-    //     console.log(json)
-    //   }).catch(error => {
-    //     console.log(error)
-    //   })
-    // },
-    // setServerStuff(){
-    //   let formData = new FormData()
-    //   formData.append('name', this.name)
-    //   formData.append('lover', this.lover)
-    //   fetch('http://localhost:8080/friends/backend/api/set.php', {
-    //     method: 'POST',
-    //     body: formData
-    //   })
-    //   .then(res => res.json())
-    //   .then(json => {
-    //     console.log(json)
-    //   }).catch(error => {
-    //     console.log(error)
-    //   })
-    // }
   }
 }
 </script>
@@ -111,7 +91,7 @@ body
 #nav
   display flex
   align-items center
-  z-index 10
+  z-index 3
   width 90%
   padding-top 35px
   padding-bottom 30px
@@ -151,7 +131,7 @@ body
   flex-grow 1
 
 .topRightBlob1
-  z-index 9
+  z-index 2
   background-image url('./assets/blob-shape.svg')
   width 400px
   height 400px

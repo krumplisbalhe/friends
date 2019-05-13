@@ -8,7 +8,7 @@ if( !isset ($_SESSION['userID'])){
   sendResponse(0, __LINE__, 'You must login to use this api.');
 }
 
-$note = $_POST['note'];
+$note = $_POST['note'] ?? '';
 $friendID = $_POST['friendID'];
 
 try{
@@ -19,12 +19,6 @@ try{
   $stmt->bindValue(':friendID', $friendID);
 
   $stmt->execute();
-
-
-  if($stmt->rowCount() == 0){
-      echo 'Sorry the notes are not updated';
-      exit;
-  }
 
   sendResponse(1, __LINE__, 'Successfully updated the note in the database');
 
