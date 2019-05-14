@@ -63,11 +63,11 @@
             <img v-if="friend.frequency=='never'" src="../assets/never.svg">
             </div>
             <div class="frequencyBox">
-              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='daily'}" @click="saveStayInTouch(1)">Daily</div>
-              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='weekly'}" @click="saveStayInTouch(2)">Weekly</div>
-              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='monthly'}" @click="saveStayInTouch(3)">Monthly</div>
-              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='yearly'}" @click="saveStayInTouch(4)">Yearly</div>
-              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='never'}" @click="saveStayInTouch(5)">Never</div>
+              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='daily'}" @click="saveStayInTouch(1, 'daily')">Daily</div>
+              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='weekly'}" @click="saveStayInTouch(2, 'weekly')">Weekly</div>
+              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='monthly'}" @click="saveStayInTouch(3, 'monthly')">Monthly</div>
+              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='yearly'}" @click="saveStayInTouch(4, 'yearly')">Yearly</div>
+              <div class="frequencyType" :class="{activeFrequency: friend.frequency=='never'}" @click="saveStayInTouch(5, 'never')">Never</div>
             </div>
           </div>
           <div v-if="contentToShow == 2" class="memories" >
@@ -248,14 +248,14 @@ export default {
       .then(json => {
         console.log(json)
         this.isEditingMemory=false
-        getFriendMemories()
+        this.memories.push({date: this.newMemoryDate,friend: this.friendID,name: this.newMemoryName})
         //check if its 1
       }).catch(error => {
 
         console.log(error)
       })
     },
-    saveStayInTouch(number){
+    saveStayInTouch(number, frequency){
       let formData = new FormData()
       formData.append('friendID', this.friendID)
       formData.append('stayInTouchFrequency', number)
@@ -267,6 +267,7 @@ export default {
       })
       .then(res => res.json())
       .then(json => {
+        this.friend.frequency = frequency
         console.log(json)
         // this.isEditingMemory=false
         // getFriendMemories()
