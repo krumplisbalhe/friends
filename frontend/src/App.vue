@@ -1,7 +1,19 @@
 <template>
   <div id="app">
-    <div v-if="this.$route.name !== 'signin'" class="topRightBlob1"></div>
-    <div v-if="this.$route.name !== 'signin'" class="topRightBlob2"></div>
+    <div class="svgContainer">
+      <svg id="navBlob" width="400" height="300" filter="url(#goo)">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+          </filter>
+        </defs>
+        <circle width=400px height=200px id="Circle10"></circle>
+        <circle width=300px height=300px id="Circle11"></circle>
+        <circle width=400px height=600px id="Circle12"></circle>
+      </svg>
+    </div>
     <div v-if="!$root.user" id="navSignedOut">
       <div>
         <router-link v-if="!$root.user" to="/"><p class="logo">FriendTimacy</p></router-link>
@@ -68,6 +80,46 @@ export default {
 
 <style lang="stylus">
 @import './assets/global.stylus.styl'
+
+@keyframes from0to360 {
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
+}
+
+@keyframes from360to0 {
+  from{transform:rotate(360deg)}
+  to{transform:rotate(0deg)}
+}
+
+#navBlob,
+#navBlob circle
+  fill brandPink
+
+#navBlob
+  position absolute
+  top -20%
+  right -10%
+
+#Circle10
+  animation from360to0 5s linear infinite
+  cx 150
+  cy 155
+  r 100
+  transform-origin 175px 150px
+
+#Circle11
+  animation from0to360 6s linear infinite
+  cx 145
+  cy 150
+  r 100
+  transform-origin 150px 165px
+
+#Circle12
+  animation from360to0 6.5s linear infinite
+  cx 155
+  cy 150
+  r 100
+  transform-origin 150px 155px
 
 body
   font-family 'Poppins', sans-serif
