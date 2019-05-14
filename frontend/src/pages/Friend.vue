@@ -72,15 +72,18 @@
             </div>
           </div>
           <div v-if="contentToShow == 2" class="memories" >
-            <button @click="isEditingMemory = true" >Add memory</button>
+            <div class="editingMemories">
+              <input v-if="isEditingMemory" type="date" v-model="newMemoryDate">
+              <input v-if="isEditingMemory" type="text" v-model="newMemoryName">
+              <button v-if="isEditingMemory" @click="saveMemory"><img class="check" src='../assets/check-solid.svg'></button>
+              <button v-if="isEditingMemory" @click="isEditingMemory = false"><img class="close" src='../assets/times-solid.svg'></button>
+              <button v-if="!isEditingMemory" @click="isEditingMemory = true" ><img class="plus" src='../assets/plus-solid.svg'></button>
+            </div>
             <div v-for="memory in memories" class="memory">
-              <img src='../assets/019-cheers.svg'>
+              <img class="cheersIcons" src='../assets/019-cheers.svg'>
               <p>{{memory.date}}</p>
               <p>{{memory.name}}</p>
             </div>
-            <input v-if="isEditingMemory" type="date" v-model="newMemoryDate">
-              <input v-if="isEditingMemory" type="text" v-model="newMemoryName">
-              <button v-if="isEditingMemory" @click="saveMemory">Save memory</button>
           </div>
           <div v-if="contentToShow == 3" class="note">
           <button @click="isEditingNote = true" class="editButton">Edit</button>
@@ -378,7 +381,32 @@ input
             color brandPink
 
       .memories
-        padding 20px 50px
+        padding 20px 30px 20px 50px
+        display flex
+        flex-direction column
+
+        .editingMemories
+          align-self flex-end
+          display flex
+          align-items center
+          margin-top 10px
+          margin-bottom 10px
+
+          button
+            margin 0
+            padding 0
+            width 10%
+
+          input
+            margin 0
+            border 1px solid brandGrey
+            margin-right 5px
+
+          .check
+            width 50%
+
+          .close
+            width 40%
 
         .memory
           display flex
@@ -388,9 +416,21 @@ input
         p
           padding-left 20px
 
-        img
+        .cheersIcons
           width 10%
           height 10%
+
+        button
+          align-self flex-end
+          border none
+          background transparent
+          cursor pointer
+          outline none
+          margin-bottom 5px
+          color #565051
+
+          .plus
+            width 20px
 
       .note
         background pink
