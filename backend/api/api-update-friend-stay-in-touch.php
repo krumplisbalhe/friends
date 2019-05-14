@@ -15,7 +15,7 @@ $friendID = $_POST['friendID'];
 //STAY-IN-TOUCH
 $stayInTouchFrequency = $_POST['stayInTouchFrequency'];
 
-$stmt = $db->prepare('INSERT INTO friends_stay_in_touch VALUES(:friendID, :stayInTouchFrequency, null)');
+$stmt = $db->prepare('UPDATE friends_stay_in_touch SET frequency_fk=:stayInTouchFrequency WHERE friend_fk=:friendID');
   $stmt->bindValue(':friendID', $friendID);
   $stmt->bindValue(':stayInTouchFrequency', $stayInTouchFrequency);
 
