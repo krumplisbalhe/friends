@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getCurrentUser(){
-      fetch('/friends/backend/api/api-get-current-user.php', {
+      fetch('/api/api-get-current-user.php', {
         method: 'GET'
       })
       .then(res => res.json())
@@ -62,7 +62,7 @@ export default {
       })
     },
     signout(){
-      fetch('/friends/backend/api/api-signout.php', {
+      fetch('/api/api-signout.php', {
         method: 'GET'
       })
       .then(res => res.json())

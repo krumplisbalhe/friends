@@ -19,7 +19,7 @@ export default {
       let formData = new FormData()
       formData.append('email', this.email)
       formData.append('userPassword', this.userPassword)
-      fetch('/friends/backend/api/api-signin.php', {
+      fetch('/api/api-signin.php', {
         method: 'POST',
         body: formData,
         credentials: 'include'

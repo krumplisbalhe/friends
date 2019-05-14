@@ -9,7 +9,8 @@
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.first_name" placeholder="First name">
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.last_name" placeholder="Last name">
         </div>
-        <img class="avatar" :src="friend.image_url">
+        <img class="avatar" v-if="!friend.image_url.includes('http')" :src="`/uploads/${friend.image_url}`">
+        <img class="avatar" v-else :src="friend.image_url">
 
       <!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
           <input type="file" name="fileToUpload" id="fileToUpload" @change="uploadImage">
@@ -124,7 +125,7 @@ export default {
   },
   methods:{
     getOneFriend(){
-      fetch(`/friends/backend/api/api-get-one-friend.php?friendID=${this.$route.params.id}`, {
+      fetch(`/api/api-get-one-friend.php?friendID=${this.$route.params.id}`, {
         method: 'GET',
         credentials: 'include'
       })
@@ -142,7 +143,7 @@ export default {
       })
     },
     getFriendMemories(){
-      fetch(`/friends/backend/api/api-get-friend-memories.php?friendID=${this.$route.params.id}`, {
+      fetch(`/api/api-get-friend-memories.php?friendID=${this.$route.params.id}`, {
         method: 'GET',
         credentials: 'include'
       })
@@ -161,7 +162,7 @@ export default {
       let formData = new FormData()
       formData.append('friendID', friend.friend_fk)
       formData.append('note', friend.note)
-      fetch('/friends/backend/api/api-update-notes.php', {
+      fetch('/api/api-update-notes.php', {
         method: 'POST',
         credentials: 'include',
         body: formData
@@ -187,7 +188,7 @@ export default {
       formData.append('workplace', friend.workplace)
       formData.append('birthday', friend.birthdate)
       formData.append('category', friend.category_fk)
-      fetch('/friends/backend/api/api-update-friend.php', {
+      fetch('/api/api-update-friend.php', {
         method: 'POST',
         credentials: 'include',
         body: formData
@@ -221,7 +222,7 @@ export default {
       let data = new FormData()
       data.append('friendID', this.friendID)
       data.append('fileToUpload', event.target.files[0])
-      fetch('/friends/backend/api/api-add-image.php', {
+      fetch('/api/api-add-image.php', {
         method: 'POST',
         body: data,
         credentials: 'include'
@@ -239,7 +240,7 @@ export default {
       formData.append('friendID', this.friendID)
       formData.append('date', this.newMemoryDate)
       formData.append('name', this.newMemoryName)
-      fetch('/friends/backend/api/api-add-memories.php', {
+      fetch('/api/api-add-memories.php', {
         method: 'POST',
         credentials: 'include',
         body: formData
@@ -260,7 +261,7 @@ export default {
       formData.append('friendID', this.friendID)
       formData.append('stayInTouchFrequency', number)
       console.log(number)
-      fetch('/friends/backend/api/api-update-friend-stay-in-touch.php', {
+      fetch('/api/api-update-friend-stay-in-touch.php', {
         method: 'POST',
         credentials: 'include',
         body: formData
@@ -369,6 +370,9 @@ input
           flex-direction column
           justify-content space-around
           color lightness(brandGrey, 80%)
+
+          .frequencyType
+            cursor pointer
 
           .activeFrequency
             color brandPink

@@ -28,7 +28,8 @@
     </div>
     <div class="dashboardInner">
       <div @click="goToFriend(friend)" v-for="friend in $root.friends" v-if="friend.category_fk==sortingCategory || sortingCategory==4" class="friendContainer">
-        <img :src="friend.image_url">
+        <img v-if="!friend.image_url.includes('http')" :src="`/uploads/${friend.image_url}`">
+        <img v-else :src="friend.image_url">
         <div class="name">{{friend.first_name}} {{friend.last_name}}</div>
       </div>
     </div>
@@ -56,7 +57,7 @@ export default {
   },
   methods:{
     getAllFriends(){
-      fetch('/friends/backend/api/api-get-all-friends.php', {
+      fetch('/api/api-get-all-friends.php', {
         method: 'GET',
         credentials: 'include'
       })
@@ -90,7 +91,7 @@ export default {
       formData.append('phoneNumber', this.phoneNumber)
       formData.append('workplace', this.workplace)
       formData.append('category', this.category)
-      fetch('/friends/backend/api/api-add-friend.php', {
+      fetch('/api/api-add-friend.php', {
         method: 'POST',
         body: formData
       })

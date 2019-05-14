@@ -29,7 +29,7 @@ export default {
       formData.append('lastName', this.lastName)
       formData.append('email', this.email)
       formData.append('userPassword', this.userPassword)
-      fetch('/friends/backend/api/api-signup.php', {
+      fetch('/api/api-signup.php', {
         method: 'POST',
         body: formData
       })
