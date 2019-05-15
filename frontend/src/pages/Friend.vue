@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button @click="isEditingFriendAbout = true" class="editButton">Edit</button>
     <button v-if="isEditingFriendAbout" @click="saveFriendDataChanges(friend)">Save changes</button>
     <div v-if="$root.user" class="friend">
       <div class="friendAbout" >
@@ -47,6 +46,7 @@
           <p v-if="!isEditingFriendAbout">{{friend.birthdate}}</p>
           <input v-if="isEditingFriendAbout" type="date" v-model="friend.birthdate" placeholder="Birthday">
         </div>
+        <button @click="isEditingFriendAbout = true" class="editAboutButton"><img src='../assets/edit-solid.svg'></button>
       </div>
       <div class="friendContent">
         <div class="friendPanel">
@@ -289,6 +289,16 @@ export default {
 <style lang="stylus">
 @import '.././assets/global.stylus.styl'
 
+.editAboutButton
+  border none
+  background transparent
+  cursor pointer
+  outline none
+  margin-bottom 5px
+
+  img
+    width 30px
+
 input
   padding 5px
   margin-bottom 8px
@@ -321,6 +331,7 @@ input
   flex-direction row
   justify-content center
   width 700px
+  padding-top 40px
 
   .friendAbout
     width 40%

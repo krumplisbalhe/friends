@@ -94,6 +94,7 @@ export default {
 #navBlob,
 #navBlob circle
   fill brandPink
+  pointer-events none
 
 #navBlob
   position absolute
