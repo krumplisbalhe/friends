@@ -14,7 +14,7 @@ $friendID = $_POST['friendID'];
 
 try{
 
-  $stmt = $db->prepare('INSERT INTO friends_memories VALUES(:friendID, :memoryDate, :memoryName)');
+  $stmt = $db->prepare('INSERT INTO friends_memories VALUES(null, :friendID, :memoryDate, :memoryName)');
 
   $stmt->bindValue(':memoryDate', $date);
   $stmt->bindValue(':memoryName', $name);
