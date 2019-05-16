@@ -14,8 +14,9 @@ $stmt = $db->prepare('SELECT * FROM friends
 JOIN friends_categories ON friends.category_fk = friends_categories.id
 JOIN friends_stay_in_touch ON friends.id = friends_stay_in_touch.friend_fk
 JOIN friends_stay_in_touch_frequencies ON friends_stay_in_touch.frequency_fk = friends_stay_in_touch_frequencies.id
-WHERE friends.id = :ID');
+WHERE friends.id = :ID AND user_fk = :userID');
 
+$stmt->bindValue(':userID', $userID);
 $stmt->bindValue(':ID', $friendID);
 $stmt->execute();
 $oneFriend = $stmt->fetchAll();
