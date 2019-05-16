@@ -127,6 +127,7 @@ body
   background-color tint(brandPink,90%)
   color brandGrey
   margin 0px
+  overflow-x hidden
 
 #app
   min-height 100vh
@@ -229,5 +230,10 @@ body
   background-repeat no-repeat
   transform rotate(77deg)
   pointer-events none
+
+input, textarea, pre
+  font-family 'Poppins', sans-serif
+  color brandGrey
+  outline none
 
 </style>

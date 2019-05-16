@@ -1,22 +1,15 @@
 <template>
-  <div>
-    <button v-if="isEditingFriendAbout" @click="saveFriendDataChanges(friend)">Save changes</button>
+  <div v-if="friend">
     <div v-if="$root.user" class="friend">
       <div class="friendAbout" >
         <div class="friendName">
           <p v-if="!isEditingFriendAbout">{{friend.first_name}} {{friend.last_name}}</p>
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.first_name" placeholder="First name">
-          <input v-if="isEditingFriendAbout" type="text" v-model="friend.last_name" placeholder="Last name">
+          <input id="lastNameInput" v-if="isEditingFriendAbout" type="text" v-model="friend.last_name" placeholder="Last name">
         </div>
         <img class="avatar" v-if="!friend.image_url.includes('http')" :src="`/uploads/${friend.image_url}`">
         <img class="avatar" v-else :src="friend.image_url">
-
-      <!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
-          <input type="file" name="fileToUpload" id="fileToUpload" @change="uploadImage">
-          <!-- <button @click="uploadImage()">Upload Image</button> -->
-      <!-- </form> -->
-
-
+        <input type="file" name="fileToUpload" id="fileToUpload" @change="uploadImage">
         <div>
           <img class="icon" src='../assets/phone-solid.svg'>
           <p v-if="!isEditingFriendAbout">{{friend.phone_number}}</p>
@@ -37,7 +30,7 @@
           <p v-if="!isEditingFriendAbout">{{friend.workplace}}</p>
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.workplace" placeholder="Workplace">
         </div>
-        <div>
+        <div v-if="!isEditingFriendAbout">
           <img v-if="!isEditingFriendAbout" class="icon" src='../assets/birthday-cake-solid.svg'>
           <p v-if="!isEditingFriendAbout">{{getAge(friend.birthdate)}}</p>
         </div>
@@ -46,7 +39,10 @@
           <p v-if="!isEditingFriendAbout">{{friend.birthdate}}</p>
           <input v-if="isEditingFriendAbout" type="date" v-model="friend.birthdate" placeholder="Birthday">
         </div>
-        <button @click="isEditingFriendAbout = true" class="editAboutButton"><img src='../assets/edit-solid.svg'></button>
+        <div class="editButtonsWrapper">
+          <button v-if="!isEditingFriendAbout" @click="isEditingFriendAbout = true" class="editAboutButton" title="Edit friend info"><img src='../assets/edit-solid.svg'></button>
+          <button v-if="isEditingFriendAbout" @click="saveFriendDataChanges(friend)" class="editAboutButton" title="Save friend info"><img src='../assets/check-solid.svg'></button>
+        </div>
       </div>
       <div class="friendContent">
         <div class="friendPanel">
@@ -75,9 +71,9 @@
             <div class="editingMemories">
               <input v-if="isEditingMemory" type="date" v-model="newMemoryDate">
               <input v-if="isEditingMemory" type="text" v-model="newMemoryName">
-              <button v-if="isEditingMemory" @click="saveMemory"><img class="check" src='../assets/check-solid.svg'></button>
-              <button v-if="isEditingMemory" @click="isEditingMemory = false"><img class="close" src='../assets/times-solid.svg'></button>
-              <button v-if="!isEditingMemory" @click="isEditingMemory = true" ><img class="plus" src='../assets/plus-solid.svg'></button>
+              <button v-if="isEditingMemory" @click="saveMemory"><img class="check" src='../assets/check-solid.svg' title="Save"></button>
+              <button v-if="isEditingMemory" @click="isEditingMemory = false"><img class="close" src='../assets/times-solid.svg' title="Close"></button>
+              <button v-if="!isEditingMemory" @click="isEditingMemory = true" ><img class="plus" src='../assets/plus-solid.svg' title="Add memory"></button>
             </div>
             <div v-for="memory in memories" class="memory">
               <img class="cheersIcons" src='../assets/019-cheers.svg'>
@@ -86,11 +82,12 @@
             </div>
           </div>
           <div v-if="contentToShow == 3" class="note">
-          <button @click="isEditingNote = true" class="editButton">Edit</button>
-          <p>Notes</p>
-          <p v-if="!isEditingNote">{{friend.note}}</p>
-          <button v-if="isEditingNote" @click="saveFriendNote(friend)">Save changes</button>
-          <input v-if="isEditingNote" type="text" v-model="friend.note">
+          <div class="noteButtonsWrapper">
+            <button v-if="!isEditingNote" class="editAboutButton" @click="startEditingNote" title="Edit notes"><img src='../assets/edit-solid.svg'></button>
+            <button class="editAboutButton" v-if="isEditingNote" @click="saveFriendNote(friend)" title="Save changes"><img src='../assets/check-solid.svg'></button>
+          </div>
+          <pre v-if="!isEditingNote">{{friend.note}}</pre>
+          <textarea ref="noteArea" v-if="isEditingNote" v-model="friend.note" placeholder="Notes to remember"></textarea>
           </div>
         </div>
       </div>
@@ -110,7 +107,9 @@
 export default {
   data () {
     return {
-      friend: {},
+      friend: {
+        'image_url': ''
+      },
       friendID:'',
       isEditingFriendAbout: false,
       isEditingNote: false,
@@ -127,6 +126,12 @@ export default {
     this.getFriendMemories()
   },
   methods:{
+    startEditingNote(){
+      this.isEditingNote = true
+      this.$nextTick(()=>{
+        this.$refs.noteArea.focus()
+      })
+    },
     getOneFriend(){
       fetch(`/api/api-get-one-friend.php?friendID=${this.$route.params.id}`, {
         method: 'GET',
@@ -233,6 +238,7 @@ export default {
       .then(res => res.json())
       .then(json => {
         console.log(json)
+        this.friend.image_url = json.data
       }).catch(error => {
 
         console.log(error)
@@ -289,15 +295,31 @@ export default {
 <style lang="stylus">
 @import '.././assets/global.stylus.styl'
 
+#fileToUpload
+  
+  label
+    border none
+
+.noteButtonsWrapper
+  align-self flex-end
+
+.editButtonsWrapper
+  align-self flex-end
+  margin-right 20px
+
+#lastNameInput
+  margin-left 10px
+
 .editAboutButton
   border none
   background transparent
   cursor pointer
   outline none
   margin-bottom 5px
+  padding 0px
 
   img
-    width 30px
+    width 20px
 
 input
   padding 5px
@@ -349,6 +371,9 @@ input
       >p
         margin 0px
         font-size 14px
+
+      >input
+        margin 0
 
     .avatar
       width 200px
@@ -444,9 +469,24 @@ input
             width 20px
 
       .note
-        background pink
-        margin 10px
-        padding-left 10px
+        display flex
+        flex-direction column
+        padding 20px 30px
+        height 100%
+
+        p
+          font-size 14px
+          margin 0px
+
+        textarea
+          border none
+          overflow auto
+          outline none
+          font-size 14px
+          height 100%
+
+        pre
+          font-size 14px
 
     .friendPanel
       margin-top 20px
