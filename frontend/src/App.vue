@@ -21,7 +21,7 @@
       <div v-if="!$root.user" class="navRight">
         <div><router-link v-if="!$root.user" to="/aboutus">About us</router-link></div>
         <div><router-link v-if="!$root.user" to="/signup">Sign up</router-link></div>
-        <div><router-link v-if="!$root.user" to="/signin">Sign in</router-link></div>
+        <div><router-link v-if="!$root.user" to="/signin">Sign in <img v-if="$route.path!='/signin'" class="navArrow" src='./assets/arrow-right-solid.svg'></router-link></div>
       </div>
     </div>
     <div v-if="$root.user" id="navSignedIn">
@@ -29,7 +29,7 @@
         <p v-if="$root.user" class="logo">FriendTimacy</p>
       </div>
       <div v-if="$root.user" class="navRightSignedIn">
-        <div><router-link v-if="$root.user && $route.name=='friend'" to="/dashboard">Dashboard</router-link></div>
+        <div><router-link v-if="$root.user && $route.name=='friend'" to="/dashboard"><img class="navList" src='./assets/list-ul-solid.svg'>Back</router-link></div>
         <div v-if="$root.user" @click="signout"><router-link to="/">Sign out</router-link></div>
       </div>
     </div>
@@ -81,6 +81,17 @@ export default {
 <style lang="stylus">
 @import './assets/global.stylus.styl'
 
+.navArrow
+  width 15px
+  vertical-align middle
+  margin-left 5px
+
+.navList
+  width 17px
+  vertical-align sub
+  margin-right 5px
+
+
 @keyframes from0to360 {
   from{transform:rotate(0)}
   to{transform:rotate(360deg)}
@@ -100,6 +111,7 @@ export default {
   position absolute
   top -20%
   right -10%
+  z-index -1
 
 #Circle10
   animation from360to0 5s linear infinite
@@ -141,7 +153,7 @@ body
   align-items center
   z-index 3
   width 90%
-  padding-top 35px
+  padding-top 30px
   padding-bottom 30px
   font-size 14px
   flex 0
@@ -161,7 +173,7 @@ body
   align-items flex-end
   z-index 3
   width 90%
-  padding-top 35px
+  padding-top 30px
   padding-bottom 30px
   font-size 14px
 

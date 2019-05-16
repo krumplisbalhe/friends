@@ -52,7 +52,7 @@ export default {
 .signup
   display flex
   flex-direction column
-  padding-top 100px
+  padding-top 50px
 
   input
     padding 15px

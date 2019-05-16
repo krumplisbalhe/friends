@@ -364,7 +364,6 @@ export default {
   width 100%
   height 40px
   padding 0px
-  padding-top 20px
 
   label
     width 100%
@@ -443,7 +442,7 @@ input
   flex-direction row
   justify-content center
   width 700px
-  padding-top 40px
+  padding-top 30px
 
   .friendAbout
     width 40%
