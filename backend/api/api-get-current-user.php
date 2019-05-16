@@ -11,6 +11,7 @@ if( !isset ($_SESSION['userID'])){
 $userID = $_SESSION['userID'];
 
 sendResponse(1, __LINE__, 'User currently signed in', $userID);
+
 //**************************************************
 function sendResponse($bStatus, $iLineNumber, $message, $data='""'){
   echo '{"status": '.$bStatus.', "code": '.$iLineNumber.', "message":"'.$message.'", "data":'.$data.'}';

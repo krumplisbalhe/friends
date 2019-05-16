@@ -11,6 +11,6 @@ try{
   );
   $db = new PDO( $sConnection, $sUserName, $sPassword, $aOptions );
 }catch( PDOException $e){
-echo '{"status":0,"message":"cannot connect to database"}';
+echo '{ "status": 0,"message": "Cannot connect to database" }';
 exit();
 }
