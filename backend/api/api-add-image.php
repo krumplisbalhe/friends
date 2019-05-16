@@ -47,12 +47,17 @@ if(isset($_POST["submit"])) {
             $stmt->bindValue(':friendID', $friendID);
             $stmt->bindValue(':imgUrl', $file_name);
             $stmt->execute();
-            echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
-
+            sendResponse(1, __LINE__, "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.", json_encode($file_name));
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
     }
 
+
+//**************************************************
+function sendResponse($bStatus, $iLineNumber, $message, $data='{}'){
+  echo '{"status": '.$bStatus.', "code": '.$iLineNumber.', "message":"'.$message.'", "data":'.$data.'}';
+  exit;
+}
 
 ?>
