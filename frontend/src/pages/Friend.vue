@@ -511,7 +511,7 @@ input
         margin 0px
         font-size 14px
         width 80%
-        overflow-wrap break-word
+        overflow auto
 
       >input
         margin 0
