@@ -165,7 +165,7 @@ body
     color brandGrey
     text-decoration none
     &.router-link-exact-active
-      color brandGreen
+      border-bottom 5px solid brandGreen
 
 #navSignedIn
   display flex
