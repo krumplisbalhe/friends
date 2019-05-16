@@ -89,7 +89,7 @@
               <p>{{memory.date}}</p>
               <p>{{memory.name}}</p>
               <div id="deleteMemory">
-              <button class="editAboutButton" @click.once="deleteFriendMemory(memory)"><img src='../assets/trash-alt-solid.svg' title="Delete memory"></button>
+              <button class="editAboutButton" @click="deleteFriendMemory(memory)"><img src='../assets/trash-alt-solid.svg' title="Delete memory"></button>
               </div>
             </div>
           </div>
@@ -290,6 +290,8 @@ export default {
         console.log(json)
         this.isEditingMemory=false
         this.memories.push({date: this.newMemoryDate,friend: this.friendID,name: this.newMemoryName})
+        this.newMemoryDate= ''
+        this.newMemoryName= ''
         //check if its 1
       }).catch(error => {
 
@@ -530,9 +532,15 @@ input
           display flex
           flex-direction row
           align-items center
+          font-size 14px
+
+          p
+            flex-grow 1
+
+          :last-child
+            align-self flex-end
 
           div
-
 
             button
               padding 0px
