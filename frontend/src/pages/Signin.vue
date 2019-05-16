@@ -2,7 +2,7 @@
   <div class="signin">
     <input type="text" id="email" v-model="email" placeholder="Email">
     <input type="password" id="userPassword" v-model="userPassword" placeholder="Password">
-    <button @click="signInUser">Sign in <img class="arrow" src='../assets/arrow-right-solid.svg'></button>
+    <button @click="signInUser">Sign in <img class="arrow" src='../assets/icons/arrow-right-solid.svg'></button>
   </div>
 </template>
 

@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <div class="textContainer">
-        <p>Set up the <span>keep in touch reminder</span> individually to each and every one of your friends</br></br>These reminders will land in your <span>mailbox</span> - now you know who to call on your way home </p>
+        <p>Set up the <span>keep in touch reminder</span> individually to each of your friends</br></br>These reminders will land in your <span>mailbox</span> - now you know who to call on your way home </p>
       </div>
         <div class="imageContainer">
         <img class="aboutImage" src="../assets/about/2.png">

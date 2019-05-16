@@ -16,42 +16,42 @@
         <div id="fileUploadWrapper">
         <label for="file">
         <input type="file" id="file" @change="uploadImage">
-        <img class="icon" title="Change image" src='../assets/upload-solid.svg'>
+        <img class="icon" title="Change image" src='../assets/icons/upload-solid.svg'>
         </label>
         </div>
         <div>
-          <img class="icon" src='../assets/phone-solid.svg'>
+          <img class="icon" src='../assets/icons/phone-solid.svg'>
           <p v-if="!isEditingFriendAbout">{{friend.phone_number}}</p>
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.phone_number" placeholder="Phone number">
         </div>
         <div>
-          <img class="icon" src='../assets/at-solid.svg'>
+          <img class="icon" src='../assets/icons/at-solid.svg'>
           <p v-if="!isEditingFriendAbout">{{friend.email}}</p>
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.email" placeholder="Email">
         </div>
         <div>
-          <img class="icon" src='../assets/map-marker-alt-solid.svg'>
+          <img class="icon" src='../assets/icons/map-marker-alt-solid.svg'>
           <p v-if="!isEditingFriendAbout">{{friend.address}}</p>
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.address" placeholder="Address">
         </div>
         <div>
-          <img class="icon" src='../assets/briefcase-solid.svg'>
+          <img class="icon" src='../assets/icons/briefcase-solid.svg'>
           <p v-if="!isEditingFriendAbout">{{friend.workplace}}</p>
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.workplace" placeholder="Workplace">
         </div>
         <div v-if="!isEditingFriendAbout">
-          <img v-if="!isEditingFriendAbout" class="icon" src='../assets/birthday-cake-solid.svg'>
+          <img v-if="!isEditingFriendAbout" class="icon" src='../assets/icons/birthday-cake-solid.svg'>
           <p v-if="!isEditingFriendAbout">{{getAge(friend.birthdate)}}</p>
         </div>
         <div>
-          <img class="icon" src='../assets/baby-carriage-solid.svg'>
+          <img class="icon" src='../assets/icons/baby-carriage-solid.svg'>
           <p v-if="!isEditingFriendAbout">{{friend.birthdate}}</p>
           <input v-if="isEditingFriendAbout" type="date" v-model="friend.birthdate" placeholder="Birthday">
         </div>
         <div class="editButtonsWrapper">
-          <button v-if="!isEditingFriendAbout" @click="isEditingFriendAbout = true" class="editAboutButton" title="Edit friend info" id="startEditingFriend"><img src='../assets/edit-solid.svg'></button>
-          <button v-if="isEditingFriendAbout" @click="deleteFriend(friend)" id="deleteFriendButton" title="Delete Friend"><img src='../assets/trash-alt-red-solid.svg'></button>
-          <button v-if="isEditingFriendAbout" @click="saveFriendDataChanges(friend)" class="editAboutButton" title="Save friend info" id="saveFriendInfo"><img src='../assets/check-solid.svg'></button>
+          <button v-if="!isEditingFriendAbout" @click="isEditingFriendAbout = true" class="editAboutButton" title="Edit friend info" id="startEditingFriend"><img src='../assets/icons/edit-solid.svg'></button>
+          <button v-if="isEditingFriendAbout" @click="deleteFriend(friend)" id="deleteFriendButton" title="Delete Friend"><img src='../assets/icons/trash-alt-red-solid.svg'></button>
+          <button v-if="isEditingFriendAbout" @click="saveFriendDataChanges(friend)" class="editAboutButton" title="Save friend info" id="saveFriendInfo"><img src='../assets/icons/check-solid.svg'></button>
         </div>
       </div>
       <div class="friendContent">
@@ -63,11 +63,11 @@
         <div class="contentToShow">
           <div v-if="contentToShow == 1" class="friendKeepInTouch">
             <div class="imageBox">
-            <img v-if="friend.frequency=='daily'" src="../assets/daily.svg">
-            <img v-if="friend.frequency=='weekly'" src="../assets/weekly.svg">
-            <img v-if="friend.frequency=='monthly'" src="../assets/monthly.svg">
-            <img v-if="friend.frequency=='yearly'" src="../assets/yearly.svg">
-            <img v-if="friend.frequency=='never'" src="../assets/never.svg">
+            <img v-if="friend.frequency=='daily'" src="../assets/frequencies/daily.svg">
+            <img v-if="friend.frequency=='weekly'" src="../assets/frequencies/weekly.svg">
+            <img v-if="friend.frequency=='monthly'" src="../assets/frequencies/monthly.svg">
+            <img v-if="friend.frequency=='yearly'" src="../assets/frequencies/yearly.svg">
+            <img v-if="friend.frequency=='never'" src="../assets/frequencies/never.svg">
             </div>
             <div class="frequencyBox">
               <div class="frequencyType" :class="{activeFrequency: friend.frequency=='daily'}" @click="saveStayInTouch(1, 'daily')">Daily</div>
@@ -81,23 +81,23 @@
             <div class="editingMemories">
               <input v-if="isEditingMemory" type="date" v-model="newMemoryDate">
               <input v-if="isEditingMemory" type="text" v-model="newMemoryName">
-              <button v-if="isEditingMemory" @click="saveMemory"><img class="check" src='../assets/check-solid.svg' title="Save"></button>
-              <button v-if="isEditingMemory" @click="isEditingMemory = false"><img class="close" src='../assets/times-solid.svg' title="Close"></button>
-              <button v-if="!isEditingMemory" @click="isEditingMemory = true" ><img class="plus" src='../assets/plus-solid.svg' title="Add memory"></button>
+              <button v-if="isEditingMemory" @click="saveMemory"><img class="check" src='../assets/icons/check-solid.svg' title="Save"></button>
+              <button v-if="isEditingMemory" @click="isEditingMemory = false"><img class="close" src='../assets/icons/times-solid.svg' title="Close"></button>
+              <button v-if="!isEditingMemory" @click="isEditingMemory = true" ><img class="plus" src='../assets/icons/plus-solid.svg' title="Add memory"></button>
             </div>
             <div v-for="memory in memories" class="memory">
-              <img class="cheersIcons" src='../assets/019-cheers.svg'>
+              <img class="cheersIcons" src='../assets/icons/cheers.svg'>
               <p>{{memory.date}}</p>
               <p>{{memory.name}}</p>
               <div id="deleteMemory">
-              <button class="editAboutButton" @click="deleteFriendMemory(memory)"><img src='../assets/trash-alt-solid.svg' title="Delete memory"></button>
+              <button class="editAboutButton" @click="deleteFriendMemory(memory)"><img src='../assets/icons/trash-alt-solid.svg' title="Delete memory"></button>
               </div>
             </div>
           </div>
           <div v-if="contentToShow == 3" class="note">
           <div class="noteButtonsWrapper">
-            <button v-if="!isEditingNote" class="editAboutButton" @click="startEditingNote" title="Edit notes"><img src='../assets/edit-solid.svg'></button>
-            <button class="editAboutButton" v-if="isEditingNote" @click="saveFriendNote(friend)" title="Save changes"><img src='../assets/check-solid.svg'></button>
+            <button v-if="!isEditingNote" class="editAboutButton" @click="startEditingNote" title="Edit notes"><img src='../assets/icons/edit-solid.svg'></button>
+            <button class="editAboutButton" v-if="isEditingNote" @click="saveFriendNote(friend)" title="Save changes"><img src='../assets/icons/check-solid.svg'></button>
           </div>
           <pre v-if="!isEditingNote">{{friend.note}}</pre>
           <textarea ref="noteArea" v-if="isEditingNote" v-model="friend.note" placeholder="Notes to remember"></textarea>
@@ -105,14 +105,6 @@
         </div>
       </div>
       </div>
-    <!-- <div div v-if="$root.user && isEditingFriendAbout">
-      <select v-model="friend.category_fk">
-        <option value="1">Family</option>
-        <option value="2">Work</option>
-        <option value="3">Friends</option>
-      </select>
-      <button @click="saveFriendDataChanges(friend)">Save changes<img class="arrow" src='../assets/arrow-right-solid.svg'> </button>
-    </div> -->
   </div>
 </template>
 

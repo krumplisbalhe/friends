@@ -21,7 +21,7 @@
       <div v-if="!$root.user" class="navRight">
         <div><router-link v-if="!$root.user" to="/aboutus">About us</router-link></div>
         <div><router-link v-if="!$root.user" to="/signup">Sign up</router-link></div>
-        <div><router-link v-if="!$root.user" to="/signin">Sign in <img v-if="$route.path!='/signin'" class="navArrow" src='./assets/arrow-right-solid.svg'></router-link></div>
+        <div><router-link v-if="!$root.user" to="/signin">Sign in <img v-if="$route.path!='/signin'" class="navArrow" src='./assets/icons/arrow-right-solid.svg'></router-link></div>
       </div>
     </div>
     <div v-if="$root.user" id="navSignedIn">
@@ -29,7 +29,7 @@
         <p v-if="$root.user" class="logo">FriendTimacy</p>
       </div>
       <div v-if="$root.user" class="navRightSignedIn">
-        <div><router-link v-if="$root.user && $route.name=='friend'" to="/dashboard"><img class="navList" src='./assets/list-ul-solid.svg'>Back</router-link></div>
+        <div><router-link v-if="$root.user && $route.name=='friend'" to="/dashboard"><img class="navList" src='./assets/icons/list-ul-solid.svg'>Back</router-link></div>
         <div v-if="$root.user" @click="signout"><router-link to="/">Sign out</router-link></div>
       </div>
     </div>
@@ -217,31 +217,6 @@ body
 
 .router-view
   flex-grow 1
-
-.topRightBlob1
-  z-index 2
-  background-image url('./assets/blob-shape.svg')
-  width 400px
-  height 400px
-  position absolute
-  top -179px
-  right -127px
-  background-size contain
-  background-repeat no-repeat
-  transform rotate(77deg)
-  pointer-events none
-
-.topRightBlob2
-  background-image url('./assets/blob-shape2.svg')
-  width 400px
-  height 400px
-  position absolute
-  top -172px
-  right -113px
-  background-size contain
-  background-repeat no-repeat
-  transform rotate(77deg)
-  pointer-events none
 
 input, textarea, pre
   font-family 'Poppins', sans-serif

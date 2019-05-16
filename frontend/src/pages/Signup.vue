@@ -4,7 +4,7 @@
     <input type="text" id="lastName" v-model="lastName" placeholder="Last name">
     <input type="text" id="email" v-model="email" placeholder="Email">
     <input type="password" id="userPassword" v-model="userPassword" placeholder="Password">
-    <button @click="signUpUser">Sign up <img class="arrow" src='../assets/arrow-right-solid.svg'> </button>
+    <button @click="signUpUser">Sign up <img class="arrow" src='../assets/icons/arrow-right-solid.svg'> </button>
   </div>
   <div class="welcome" v-else>
     <img src="../assets/bracelet.svg">

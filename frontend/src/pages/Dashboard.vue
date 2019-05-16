@@ -5,7 +5,7 @@
       <button @click="sortingCategory = 2" :class="{activeButton: sortingCategory==2}">Work</button>
       <button @click="sortingCategory = 3" :class="{activeButton: sortingCategory==3}">Friends</button>
       <button @click="sortingCategory = 4" :class="{activeButton: sortingCategory==4}">All</button>
-      <button  @click="openModal" title="Add friend"><img class="plus" src='../assets/plus-solid.svg'></button>
+      <button  @click="openModal" title="Add friend"><img class="plus" src='../assets/icons/plus-solid.svg'></button>
     </div>
     <div @click="closeModal" v-if="modalIsOpen==true" class="greyLayer">
     </div>
@@ -23,7 +23,7 @@
           <option value="2">Work</option>
           <option value="3">Friends</option>
         </select>
-        <button @click="addFriend"> Add friend<img class="arrow" src='../assets/arrow-right-solid.svg'> </button>
+        <button @click="addFriend"> Add friend<img class="arrow" src='../assets/icons/arrow-right-solid.svg'> </button>
       </div>
     </div>
     <div class="dashboardInner">
@@ -100,6 +100,14 @@ export default {
       .then(json => {
         this.closeModal()
         this.getAllFriends()
+        this.firstName = ''
+        this.lastName = ''
+        this.email = ''
+        this.birthday = ''
+        this.address = ''
+        this.phoneNumber = ''
+        this.workplace = ''
+        this.category = 1
         console.log(json)
       }).catch(error => {
 
