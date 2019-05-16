@@ -603,7 +603,7 @@ input
                 width 15px
 
         p
-          padding-left 20px
+          padding-left 10px
 
         .cheersIcons
           width 10%

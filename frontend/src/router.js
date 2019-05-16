@@ -5,6 +5,7 @@ import Signin from './pages/Signin.vue'
 import Signup from './pages/Signup.vue'
 import Dashboard from './pages/Dashboard.vue'
 import Friend from './pages/Friend.vue'
+import About from './pages/About.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/friend/:id',
       name: 'friend',
       component: Friend
+    },
+    {
+      path: '/aboutus',
+      name: 'aboutus',
+      component: About
     }
   ]
 })

@@ -6,8 +6,10 @@
     <input type="password" id="userPassword" v-model="userPassword" placeholder="Password">
     <button @click="signUpUser">Sign up <img class="arrow" src='../assets/arrow-right-solid.svg'> </button>
   </div>
-  <div v-else>
-    <p>One step closer to nurture your relationships. You can find the Log in button in the right upper corner.</p>
+  <div class="welcome" v-else>
+    <img src="../assets/bracelet.svg">
+    <p>One step closer to <span>nurture</span> your <span>relationships</span>.
+    You can find the Log in button in the right upper corner.</p>
   </div>
 </template>
 
@@ -86,5 +88,23 @@ export default {
 
 ::placeholder
   color #565051
+
+.welcome
+  font-size 18px
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+  padding 0px 20% 5px 20%
+  font-size 20px
+  letter-spacing 2px
+  text-align center
+
+  span
+    font-weight 700
+
+  img
+    width 150px
+
 
 </style>
