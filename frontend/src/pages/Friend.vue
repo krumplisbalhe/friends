@@ -336,6 +336,7 @@ export default {
   justify-items center
   border-radius 50%
   overflow hidden
+  margin-bottom 5px
 
   .avatar
     width 200px
@@ -452,16 +453,19 @@ input
     flex-direction column
     align-items flex-start
 
-    >div:not(:first-child)
+    >div:nth-child(n+3):nth-last-child(n)
       display flex
       flex-direction row
       align-items center
-      padding-left 25%
+      padding-left 20%
       margin-bottom 10px
+      max-width 70%
 
       >p
         margin 0px
         font-size 14px
+        width 80%
+        overflow-wrap break-word
 
       >input
         margin 0
