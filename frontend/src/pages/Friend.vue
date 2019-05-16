@@ -49,8 +49,9 @@
           <input v-if="isEditingFriendAbout" type="date" v-model="friend.birthdate" placeholder="Birthday">
         </div>
         <div class="editButtonsWrapper">
-          <button v-if="!isEditingFriendAbout" @click="isEditingFriendAbout = true" class="editAboutButton" title="Edit friend info"><img src='../assets/edit-solid.svg'></button>
-          <button v-if="isEditingFriendAbout" @click="saveFriendDataChanges(friend)" class="editAboutButton" title="Save friend info"><img src='../assets/check-solid.svg'></button>
+          <button v-if="!isEditingFriendAbout" @click="isEditingFriendAbout = true" class="editAboutButton" title="Edit friend info" id="startEditingFriend"><img src='../assets/edit-solid.svg'></button>
+          <button v-if="isEditingFriendAbout" @click="deleteFriend(friend)" id="deleteFriendButton" title="Delete Friend"><img src='../assets/trash-alt-red-solid.svg'></button>
+          <button v-if="isEditingFriendAbout" @click="saveFriendDataChanges(friend)" class="editAboutButton" title="Save friend info" id="saveFriendInfo"><img src='../assets/check-solid.svg'></button>
         </div>
       </div>
       <div class="friendContent">
@@ -138,6 +139,24 @@ export default {
     this.getFriendMemories()
   },
   methods:{
+    deleteFriend(friend){
+      let formData = new FormData()
+      formData.append('friendID', friend.friend_fk)
+      fetch('/api/api-delete-friend.php', {
+        method: 'POST',
+        credentials: 'include',
+        body:formData
+      })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        this.$router.push('/dashboard')
+        //check if its 1
+      }).catch(error => {
+
+        console.log(error)
+      })
+    },
     startEditingNote(){
       this.isEditingNote = true
       this.$nextTick(()=>{
@@ -328,6 +347,29 @@ export default {
 <style lang="stylus">
 @import '.././assets/global.stylus.styl'
 
+#startEditingFriend
+  align-self flex-end
+  flex-grow 1
+  text-align right
+
+#saveFriendInfo
+  align-self flex-end
+  flex-grow 1
+  text-align right
+
+#deleteFriendButton
+  border none
+  background transparent
+  cursor pointer
+  outline none
+  margin-bottom 5px
+  padding 0px
+  flex-grow 1
+  text-align left
+
+  img
+    width 15px
+
 #avatarWrapper
   padding 0px
   align-self center
@@ -396,13 +438,17 @@ export default {
   align-self flex-end
 
 .editButtonsWrapper
-  align-self flex-end
+  width 100%
   margin-right 20px
+  display flex
+  flex-direction row
+  // padding-top 20px
 
 #lastNameInput
   margin-left 10px
 
 .editAboutButton
+  padding-top 15px
   border none
   background transparent
   cursor pointer

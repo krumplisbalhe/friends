@@ -74,7 +74,7 @@ export default {
     },
     goToFriend(friend){
       console.log(friend)
-      this.$router.push(`friend/${friend.id}`);
+      this.$router.push(`friend/${friend.id}`)
     },
     openModal(){
       this.modalIsOpen=true
