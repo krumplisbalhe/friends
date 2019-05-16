@@ -14,7 +14,7 @@
         <input type="text" v-model="firstName" placeholder="First name">
         <input type="text" v-model="lastName" placeholder="Last name">
         <input type="text" v-model="email" placeholder="Email">
-        <input type="date" v-model="birthday" placeholder="Birthday">
+        <input type="date" v-model="birthday" placeholder="Birthday" title="Birth date">
         <input type="text" v-model="address" placeholder="Address">
         <input type="text" v-model="phoneNumber" placeholder="Phone number">
         <input type="text" v-model="workplace" placeholder="Workplace">
@@ -28,8 +28,9 @@
     </div>
     <div class="dashboardInner">
       <div @click="goToFriend(friend)" v-for="friend in $root.friends" v-if="friend.category_fk==sortingCategory || sortingCategory==4" class="friendContainer">
-        <img v-if="!friend.image_url.includes('http')" :src="`/uploads/${friend.image_url}`">
-        <img v-else :src="friend.image_url">
+        <img v-if="friend.image_url==''" src="../assets/dummy.png">
+        <img v-if="friend.image_url !=='' && !friend.image_url.includes('http')" :src="`/uploads/${friend.image_url}`">
+        <img v-if="friend.image_url !=='' &&friend.image_url.includes('http')" :src="friend.image_url">
         <div class="name">{{friend.first_name}} {{friend.last_name}}</div>
       </div>
     </div>

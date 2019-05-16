@@ -7,9 +7,15 @@
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.first_name" placeholder="First name">
           <input id="lastNameInput" v-if="isEditingFriendAbout" type="text" v-model="friend.last_name" placeholder="Last name">
         </div>
-        <img class="avatar" v-if="!friend.image_url.includes('http')" :src="`/uploads/${friend.image_url}`">
-        <img class="avatar" v-else :src="friend.image_url">
-        <input type="file" name="fileToUpload" id="fileToUpload" @change="uploadImage">
+        <img class="avatar" v-if="friend.image_url==''" src="../assets/dummy.png">
+        <img class="avatar" v-if="friend.image_url !=='' && !friend.image_url.includes('http')" :src="`/uploads/${friend.image_url}`">
+        <img class="avatar" v-if="friend.image_url !=='' &&friend.image_url.includes('http')" :src="friend.image_url">
+        <div id="fileUploadWrapper">
+        <label for="file">
+        <input type="file" id="file" @change="uploadImage">
+        <img class="icon" title="Change image" src='../assets/upload-solid.svg'>
+        </label>
+        </div>
         <div>
           <img class="icon" src='../assets/phone-solid.svg'>
           <p v-if="!isEditingFriendAbout">{{friend.phone_number}}</p>
@@ -295,10 +301,35 @@ export default {
 <style lang="stylus">
 @import '.././assets/global.stylus.styl'
 
-#fileToUpload
-  
+#fileUploadWrapper
+  width 100%
+  height 40px
+  padding 0px
+  padding-top 20px
+
   label
-    border none
+    width 100%
+    margin-top -50px
+    height 10px
+    position relative
+
+    input
+      width 100%
+      height 30px
+      pointer-events none
+      opacity 0
+      font-size 0
+      padding 0px
+      margin 0px
+      border none
+
+    img
+      position absolute
+      top 20px
+      left 130px
+      cursor pointer
+      width 20px
+      height 20px
 
 .noteButtonsWrapper
   align-self flex-end
