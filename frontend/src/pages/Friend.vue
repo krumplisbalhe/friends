@@ -85,6 +85,9 @@
               <img class="cheersIcons" src='../assets/019-cheers.svg'>
               <p>{{memory.date}}</p>
               <p>{{memory.name}}</p>
+              <div id="deleteMemory">
+              <button class="editAboutButton" @click.once="deleteFriendMemory(memory)"><img src='../assets/trash-alt-solid.svg' title="Delete memory"></button>
+              </div>
             </div>
           </div>
           <div v-if="contentToShow == 3" class="note">
@@ -166,6 +169,25 @@ export default {
         console.log(json)
         this.memories = json.data
         console.log(this.memories)
+        //check if its 1
+      }).catch(error => {
+
+        console.log(error)
+      })
+    },
+    deleteFriendMemory(memory){
+      let formData = new FormData()
+      console.log(memory.id)
+      formData.append('memoryID', memory.id)
+      fetch('/api/api-delete-memories.php', {
+        method: 'POST',
+        credentials: 'include',
+        body:formData
+      })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        this.getFriendMemories()
         //check if its 1
       }).catch(error => {
 
@@ -479,6 +501,19 @@ input
           display flex
           flex-direction row
           align-items center
+
+          div
+
+
+            button
+              padding 0px
+              margin-top 16px
+              margin-bottom 16px
+              margin-left 30px
+              align-self flex-end
+
+              img
+                width 15px
 
         p
           padding-left 20px
