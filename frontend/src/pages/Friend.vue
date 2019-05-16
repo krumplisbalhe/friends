@@ -7,9 +7,12 @@
           <input v-if="isEditingFriendAbout" type="text" v-model="friend.first_name" placeholder="First name">
           <input id="lastNameInput" v-if="isEditingFriendAbout" type="text" v-model="friend.last_name" placeholder="Last name">
         </div>
-        <img class="avatar" v-if="friend.image_url==''" src="../assets/dummy.png">
-        <img class="avatar" v-if="friend.image_url !=='' && !friend.image_url.includes('http')" :src="`/uploads/${friend.image_url}`">
-        <img class="avatar" v-if="friend.image_url !=='' &&friend.image_url.includes('http')" :src="friend.image_url">
+        <div id="avatarWrapper">
+          <img class="avatar" v-if="friend.image_url==''" src="../assets/dummy.png">
+          <img class="avatar" v-if="friend.image_url !=='' && !friend.image_url.includes('http')" :src="`/uploads/${friend.image_url}`">
+          <img class="avatar" v-if="friend.image_url !=='' &&friend.image_url.includes('http')" :src="friend.image_url">
+          <div :class="[{categoryTitle: true}, friend.category_name]"><p>{{friend.category_name}}</p></div>
+        </div>
         <div id="fileUploadWrapper">
         <label for="file">
         <input type="file" id="file" @change="uploadImage">
@@ -323,6 +326,40 @@ export default {
 <style lang="stylus">
 @import '.././assets/global.stylus.styl'
 
+#avatarWrapper
+  padding 0px
+  align-self center
+  position relative
+  display grid
+  justify-items center
+  border-radius 50%
+  overflow hidden
+
+  .avatar
+    width 200px
+    height 200px
+    object-fit cover
+    align-self center
+
+  .categoryTitle
+    position absolute
+    width 100%
+    color white
+    bottom 0px
+    text-transform capitalize
+    text-align center
+    color white
+    opacity 0.9
+
+    &.family
+      background-color brandGreen
+
+    &.friends
+      background-color brandPink
+
+    &.work
+      background-color brandGrey
+
 #fileUploadWrapper
   width 100%
   height 40px
@@ -427,13 +464,6 @@ input
 
       >input
         margin 0
-
-    .avatar
-      width 200px
-      height 200px
-      object-fit cover
-      border-radius 50%
-      align-self center
 
   .friendContent
     // margin-top 80px
