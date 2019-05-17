@@ -3,13 +3,13 @@ brandGreen = hsla(150, 30%, 83%, 1)
 brandGrey = hsla(206, 15%, 41%, 1)
 
 
-input, textarea, pre
+input, textarea, pre, select
   font-family 'Poppins', sans-serif
   color brandGrey
   outline none
   background-color white
 
-input
+input, select
   box-shadow 3px 6px 19px -10px #ccc
   border 3px white solid
   border-radius 25px
@@ -26,6 +26,18 @@ button
 
 .activeButton
   border-bottom 5px solid brandGreen
+
+.buttonPanel
+  display flex
+  justify-content space-between
+  align-items flex-start
+
+  button
+    font-size 14px
+    margin-bottom 5px
+    text-transform uppercase
+    color #565051
+
 
 .icon
   width 20px
