@@ -1,7 +1,7 @@
 <template>
   <div class="landing">
     <div class="svgContainer">
-      <svg id="pinkBlob" width="400" height="300" filter="url(#goo)">
+      <svg id="pinkBlob" class="blobs" width="400" height="300" filter="url(#goo)">
         <defs>
           <filter id="goo">
             <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
@@ -13,7 +13,7 @@
         <circle width=300px height=300px id="Circle2"></circle>
         <circle width=400px height=600px id="Circle3"></circle>
       </svg>
-      <svg id="greyBlob" width="400" height="300" filter="url(#goo)">
+      <svg id="greyBlob" class="blobs" width="400" height="300" filter="url(#goo)">
         <defs>
           <filter id="goo">
             <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
@@ -25,7 +25,7 @@
         <circle width=400px height=700px id="Circle5"></circle>
         <circle width=600px height=600px id="Circle6"></circle>
       </svg>
-      <svg id="greenBlob" width="400" height="300" filter="url(#goo)">
+      <svg id="greenBlob" class="blobs" width="400" height="300" filter="url(#goo)">
         <defs>
           <filter id="goo">
             <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
@@ -62,7 +62,6 @@ export default {
 .landing
   width 100%
   display flex
-  flex-direction row
 
   div
     width 50%
@@ -78,32 +77,19 @@ export default {
     p
       padding-left 0
 
-@keyframes from0to360 {
-  from{transform:rotate(0)}
-  to{transform:rotate(360deg)}
-}
-
-@keyframes from360to0 {
-  from{transform:rotate(360deg)}
-  to{transform:rotate(0deg)}
-}
-
 #pinkBlob,
 #pinkBlob circle
   fill brandPink
 
 #pinkBlob
-  position absolute
   left 5%
   top 25%
 
 #greyBlob
-  position absolute
   left 15%
   top 50%
 
 #greenBlob
-  position absolute
   left 20%
   top 10%
 

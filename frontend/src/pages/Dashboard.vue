@@ -5,7 +5,7 @@
       <button @click="sortingCategory = 2" :class="{activeButton: sortingCategory==2}">Work</button>
       <button @click="sortingCategory = 3" :class="{activeButton: sortingCategory==3}">Friends</button>
       <button @click="sortingCategory = 4" :class="{activeButton: sortingCategory==4}">All</button>
-      <button  @click="openModal" title="Add friend"><img class="plus" src='../assets/icons/plus-solid.svg'></button>
+      <button  @click="openModal" title="Add friend"><img class="icon" src='../assets/icons/plus-solid.svg'></button>
     </div>
     <div @click="closeModal" v-if="modalIsOpen==true" class="greyLayer">
     </div>
@@ -124,26 +124,14 @@ export default {
 .panel
   margin-top 80px
   display flex
-  flex-direction row
   justify-content space-between
   align-items flex-start
 
   button
-    border none
-    background transparent
-    cursor pointer
-    outline none
-    font-family 'Poppins', sans-serif
     font-size 14px
     margin-bottom 5px
     text-transform uppercase
     color #565051
-
-    .plus
-      width 20px
-
-  .activeButton
-    border-bottom 5px solid brandGreen
 
 .dashboardInner
   z-index 0

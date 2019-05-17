@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="svgContainer">
-      <svg id="navBlob" width="400" height="300" filter="url(#goo)">
+      <svg id="navBlob" class="blobs" width="400" height="300" filter="url(#goo)">
         <defs>
           <filter id="goo">
             <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
@@ -14,22 +14,22 @@
         <circle width=400px height=600px id="Circle12"></circle>
       </svg>
     </div>
-    <div v-if="!$root.user" id="navSignedOut">
+    <div v-if="!$root.user" id="navSignedOut" class="nav">
       <div>
         <router-link v-if="!$root.user" to="/"><p class="logo">FriendTimacy</p></router-link>
       </div>
       <div v-if="!$root.user" class="navRight">
         <div><router-link v-if="!$root.user" to="/aboutus">About us</router-link></div>
         <div><router-link v-if="!$root.user" to="/signup">Sign up</router-link></div>
-        <div><router-link v-if="!$root.user" to="/signin">Sign in <img v-if="$route.path!='/signin'" class="navArrow" src='./assets/icons/arrow-right-solid.svg'></router-link></div>
+        <div><router-link v-if="!$root.user" to="/signin">Sign in <img v-if="$route.path!='/signin'" class="navArrow" src="./assets/icons/arrow-right-solid.svg"></router-link></div>
       </div>
     </div>
-    <div v-if="$root.user" id="navSignedIn">
+    <div v-if="$root.user" id="navSignedIn" class="nav">
       <div>
         <p v-if="$root.user" class="logo">FriendTimacy</p>
       </div>
       <div v-if="$root.user" class="navRightSignedIn">
-        <div><router-link v-if="$root.user && $route.name=='friend'" to="/dashboard"><img class="navList" src='./assets/icons/list-ul-solid.svg'>Back</router-link></div>
+        <div><router-link v-if="$root.user && $route.name=='friend'" to="/dashboard"><img class="navList" src="./assets/icons/list-ul-solid.svg">Back</router-link></div>
         <div v-if="$root.user" @click="signout"><router-link to="/">Sign out</router-link></div>
       </div>
     </div>
@@ -81,34 +81,11 @@ export default {
 <style lang="stylus">
 @import './assets/global.stylus.styl'
 
-.navArrow
-  width 15px
-  vertical-align middle
-  margin-left 5px
-
-.navList
-  width 17px
-  vertical-align sub
-  margin-right 5px
-
-
-@keyframes from0to360 {
-  from{transform:rotate(0)}
-  to{transform:rotate(360deg)}
-}
-
-@keyframes from360to0 {
-  from{transform:rotate(360deg)}
-  to{transform:rotate(0deg)}
-}
-
 #navBlob,
 #navBlob circle
   fill brandPink
-  pointer-events none
 
 #navBlob
-  position absolute
   top -20%
   right -10%
   z-index -1
@@ -148,79 +125,47 @@ body
   align-items center
   margin 0px 40px 20px 40px
 
-#navSignedOut
-  display flex
-  align-items center
-  z-index 3
-  width 90%
-  padding-top 30px
-  padding-bottom 30px
-  font-size 14px
-  flex 0
-
-  div
-    width 50%
-
-  a
-    color brandGrey
-    text-decoration none
-    &.router-link-exact-active
-      border-bottom 5px solid brandGreen
-
 #navSignedIn
-  display flex
-  flex-direction row
   align-items flex-end
-  z-index 3
-  width 90%
-  padding-top 30px
-  padding-bottom 30px
-  font-size 14px
-
-  div
-    width 50%
-
-    a
-      color brandGrey
-      text-decoration none
-
-      &.router-link-exact-active
-        color brandGreen
 
   .navRightSignedIn
     display flex
-    flex-direction row
     justify-content flex-end
 
     div
       text-align right
+
+      .navList
+        width 17px
+        vertical-align sub
+        margin-right 5px
+
+#navSignedOut
+  align-items center
+
+  .navRight
+    display flex
+    flex-direction row
+    align-items space between
+
+    > div
+      text-align center
+
+    :first-child
+      text-align left
+
+    :last-child
+      text-align right
+
+    .navArrow
+      width 15px
+      vertical-align middle
+      margin-left 5px
 
 .logo
   color brandPink
   margin 0px
   font-weight bold
   letter-spacing 2px
-
-.navRight
-  display flex
-  flex-direction row
-  align-items space between
-
-  > div
-    text-align center
-
-  :first-child
-    text-align left
-
-  :last-child
-    text-align right
-
-.router-view
-  flex-grow 1
-
-input, textarea, pre
-  font-family 'Poppins', sans-serif
-  color brandGrey
-  outline none
 
 </style>

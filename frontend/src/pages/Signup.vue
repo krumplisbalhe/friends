@@ -1,10 +1,10 @@
 <template>
   <div class="signup" v-if="!submitted">
-    <input type="text" id="firstName" v-model="firstName" placeholder="First name">
-    <input type="text" id="lastName" v-model="lastName" placeholder="Last name">
-    <input type="text" id="email" v-model="email" placeholder="Email">
-    <input type="password" id="userPassword" v-model="userPassword" placeholder="Password">
-    <button @click="signUpUser">Sign up <img class="arrow" src='../assets/icons/arrow-right-solid.svg'> </button>
+    <input type="text" v-model="firstName" placeholder="First name">
+    <input type="text" v-model="lastName" placeholder="Last name">
+    <input type="text" v-model="email" placeholder="Email">
+    <input type="password" v-model="userPassword" placeholder="Password">
+    <button class="buttonswithArrow" @click="signUpUser">Sign up <img class="arrow" src='../assets/icons/arrow-right-solid.svg'> </button>
   </div>
   <div class="welcome" v-else>
     <img src="../assets/bracelet.svg">
@@ -54,40 +54,7 @@ export default {
 .signup
   display flex
   flex-direction column
-  padding-top 50px
-
-  input
-    padding 15px
-    width 300px
-    margin-bottom 30px
-    border-radius 25px
-    border 3px white solid
-    background-color white
-    outline none
-    box-shadow 3px 6px 19px -10px #ccc
-    color #565051
-
-  button
-    padding 15px
-    margin-bottom 20px
-    // border-radius 25px
-    background-color transparent
-    border none
-    color #565051
-    font-weight bold
-    width 50%
-    align-self center
-    cursor pointer
-
-    .arrow
-      width 20px
-      position relative
-      top 8px
-      left 3px
-      color white
-
-::placeholder
-  color #565051
+  padding-top 80px
 
 .welcome
   font-size 18px
@@ -105,6 +72,5 @@ export default {
 
   img
     width 150px
-
 
 </style>

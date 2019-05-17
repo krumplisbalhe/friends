@@ -56,9 +56,9 @@
       </div>
       <div class="friendContent">
         <div class="friendPanel">
-          <button @click="contentToShow = 1" :class="{activeButt: contentToShow==1}">Stay in touch</button>
-          <button @click="contentToShow = 2" :class="{activeButt: contentToShow==2}">Memories</button>
-          <button @click="contentToShow = 3" :class="{activeButt: contentToShow==3}">Notes</button>
+          <button @click="contentToShow = 1" :class="{activeButton: contentToShow==1}">Stay in touch</button>
+          <button @click="contentToShow = 2" :class="{activeButton: contentToShow==2}">Memories</button>
+          <button @click="contentToShow = 3" :class="{activeButton: contentToShow==3}">Notes</button>
         </div>
         <div class="contentToShow">
           <div v-if="contentToShow == 1" class="friendKeepInTouch">
@@ -651,6 +651,6 @@ input
         text-transform uppercase
         color #565051
 
-      .activeButt
-        border-bottom 5px solid brandGreen
+        .activeButton
+          border-bottom 5px solid brandGreen
 </style>
