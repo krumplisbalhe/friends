@@ -16,14 +16,7 @@
 					<Keepintouch :friend="friend" @saveStayInTouchData="saveStayInTouch" v-if="contentToShow == 1">
 					</Keepintouch>
 					<Memories :memories="memories" v-if="contentToShow == 2" @saveMemoryData="saveMemory" @deleteFriendMemoryData="deleteFriendMemory"></Memories>
-					<div v-if="contentToShow == 3" class="note">
-					<div class="noteButtonsWrapper">
-						<button v-if="!isEditingNote" class="editAboutButton" @click="startEditingNote" title="Edit notes"><img src='../assets/icons/edit-solid.svg'></button>
-						<button class="editAboutButton" v-if="isEditingNote" @click="saveFriendNote(friend)" title="Save changes"><img src='../assets/icons/check-solid.svg'></button>
-					</div>
-					<pre v-if="!isEditingNote">{{friend.note}}</pre>
-					<textarea ref="noteArea" v-if="isEditingNote" v-model="friend.note" placeholder="Notes to remember"></textarea>
-					</div>
+					<Notes v-if="contentToShow == 3" :notes="notes" @saveData="saveFriendNote"></Notes>
 				</div>
 			</div>
 			</div>
@@ -34,13 +27,15 @@
 import FriendAbout from '@/components/FriendAbout.vue'
 import Keepintouch from '@/components/Keepintouch.vue'
 import Memories from '@/components/Memories.vue'
+import Notes from '@/components/Notes.vue'
 
 export default {
 	name: 'dashboard',
 	components: {
 		FriendAbout,
 		Keepintouch,
-		Memories
+		Memories,
+		Notes
 	},
 	data () {
 		return {
@@ -48,9 +43,9 @@ export default {
 				'image_url': ''
 			},
 			friendID:'',
-			isEditingNote: false,
 			memories: [],
-			contentToShow: 1
+			contentToShow: 1,
+			notes:''
 		}
 	},
 	created(){
@@ -76,12 +71,6 @@ export default {
 				console.log(error)
 			})
 		},
-		startEditingNote(){
-			this.isEditingNote = true
-			this.$nextTick(()=>{
-				this.$refs.noteArea.focus()
-			})
-		},
 		getOneFriend(){
 			fetch(`/api/api-get-one-friend.php?friendID=${this.$route.params.id}`, {
 				method: 'GET',
@@ -93,6 +82,7 @@ export default {
 				//check if its 1
 				this.friend = json.data[0]
 				this.friendID = json.data[0].friend_fk
+				this.notes = json.data[0].note
 				this.imageFuck="http://localhost:9000/uploads/" + this.friend.image_url
 				console.log(this.friend.image_url)
 			}).catch(error => {
@@ -135,10 +125,10 @@ export default {
 				console.log(error)
 			})
 		},
-		saveFriendNote(friend){
+		saveFriendNote(friend, note){
 			let formData = new FormData()
 			formData.append('friendID', friend.friend_fk)
-			formData.append('note', friend.note)
+			formData.append('note', note)
 			fetch('/api/api-update-notes.php', {
 				method: 'POST',
 				credentials: 'include',
@@ -147,7 +137,6 @@ export default {
 			.then(res => res.json())
 			.then(json => {
 				console.log(json)
-				this.isEditingNote=false
 				//check if its 1
 			}).catch(error => {
 
@@ -247,49 +236,26 @@ export default {
 </script>
 
 <style lang="stylus">
-.friendAbout
-	width 40%
-
-.friendContent
-	width 60%
-	display flex
-	flex-direction column
-
-	#friendPanel
-		margin-top 20px
-
-	.contentToShow
-		background-color white
-		box-shadow 3px 6px 19px -10px #ccc
-		height 100%
-
-		.note
-			display flex
-			flex-direction column
-			padding 20px 30px
-			height 100%
-
-			p
-				font-size 14px
-				margin 0px
-
-			textarea
-				border none
-				overflow auto
-				outline none
-				font-size 14px
-				height 100%
-
-			pre
-				font-size 14px
-
 .friend
 	display flex
 	justify-content center
 	width 700px
 	padding-top 30px
 
-.noteButtonsWrapper
-	align-self flex-end
-	
+	.friendAbout
+		width 40%
+
+	.friendContent
+		width 60%
+		display flex
+		flex-direction column
+
+		#friendPanel
+			margin-top 20px
+
+		.contentToShow
+			background-color white
+			box-shadow 3px 6px 19px -10px #CCCCCC
+			height 100%
+
 </style>
