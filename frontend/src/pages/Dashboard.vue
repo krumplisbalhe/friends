@@ -102,7 +102,7 @@ export default {
 	width 700px
 	background-color white
 	padding-top 20px
-	box-shadow 3px 6px 19px -10px #ccc
+	box-shadow 3px 6px 19px -10px #CCCCCC
 
 .friendContainer
 	display flex

@@ -68,7 +68,7 @@ export default {
 
 			.aboutImage
 				width 100%
-				box-shadow 0 0 50px #FFFFFF, -10px 0 80px #FFFFFF, 10px 0 80px #ffffff
+				box-shadow 0 0 50px #FFFFFF, -10px 0 80px #FFFFFF, 10px 0 80px #FFFFFF
 
 		.textContainer
 			width 40%
