@@ -79,6 +79,7 @@ export default {
 
 
 <style lang="stylus">
+@import './assets/variables.stylus.styl'
 @import './assets/global.stylus.styl'
 
 #navBlob,
