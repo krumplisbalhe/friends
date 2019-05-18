@@ -1,11 +1,11 @@
 <template>
 	<div class="keepInTouch">
 		<div class="imageBox">
-			<img v-if="friend.frequency=='daily'" src="../assets/frequencies/daily.svg">
-			<img v-if="friend.frequency=='weekly'" src="../assets/frequencies/weekly.svg">
-			<img v-if="friend.frequency=='monthly'" src="../assets/frequencies/monthly.svg">
-			<img v-if="friend.frequency=='yearly'" src="../assets/frequencies/yearly.svg">
-			<img v-if="friend.frequency=='never'" src="../assets/frequencies/never.svg">
+			<img v-if="friend.frequency=='daily'" src="../assets/frequencies/daily.png">
+			<img v-if="friend.frequency=='weekly'" src="../assets/frequencies/weekly.png">
+			<img v-if="friend.frequency=='monthly'" src="../assets/frequencies/monthly.png">
+			<img v-if="friend.frequency=='yearly'" src="../assets/frequencies/yearly.png">
+			<img v-if="friend.frequency=='never'" src="../assets/frequencies/never.png">
 		</div>
 		<div class="frequencyBox">
 			<div class="frequencyType" :class="{activeFrequency: friend.frequency=='daily'}" @click="saveStayInTouchData(1, 'daily')">Daily</div>
@@ -43,6 +43,9 @@ export default {
 
 	.imageBox
 		width 70%
+		display flex
+		justify-content center
+		align-items center
 
 		img
 			width 50%
@@ -52,6 +55,7 @@ export default {
 		flex-direction column
 		justify-content space-around
 		color lightness(brandGrey, 80%)
+		height 200px
 
 		.frequencyType
 			cursor pointer
