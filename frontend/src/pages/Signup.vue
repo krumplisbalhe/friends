@@ -3,7 +3,7 @@
 		<input type="text" v-model="firstName" placeholder="First name">
 		<input type="text" v-model="lastName" placeholder="Last name">
 		<input type="text" v-model="email" placeholder="Email">
-		<input type="password" v-model="userPassword" placeholder="Password">
+		<input type="password" v-model="userPassword" placeholder="Password" @keyup.enter="signUpUser">
 		<button class="buttonswithArrow" @click="signUpUser">Sign up <img class="arrow" src='../assets/icons/arrow-right-solid.svg'> </button>
 	</div>
 	<div class="welcome" v-else>

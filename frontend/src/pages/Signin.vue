@@ -1,7 +1,7 @@
 <template>
 	<div class="signin">
 		<input type="text" v-model="email" placeholder="Email">
-		<input type="password" v-model="userPassword" placeholder="Password">
+		<input type="password" v-model="userPassword" placeholder="Password" @keyup.enter="signInUser">
 		<button class="buttonswithArrow" @click="signInUser">Sign in <img class="arrow" src='../assets/icons/arrow-right-solid.svg'></button>
 	</div>
 </template>
