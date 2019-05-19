@@ -2,10 +2,10 @@
 	<div  class="note">
 		<div class="noteButtonsWrapper">
 			<button v-if="!isEditingNote" @click="startEditingNote" title="Edit notes"><img src='../assets/icons/edit-solid.svg'></button>
-			<button v-if="isEditingNote" @click="saveData(notes)" title="Save changes"><img src='../assets/icons/check-solid.svg'></button>
+			<button v-if="isEditingNote" @click="saveData" title="Save changes"><img src='../assets/icons/check-solid.svg'></button>
 		</div>
 		<pre v-if="!isEditingNote">{{ notes }}</pre>
-		<textarea ref="noteArea" v-if="isEditingNote" v-model="notes" placeholder="Notes to remember"></textarea>
+		<textarea ref="noteArea" v-if="isEditingNote" v-model="note" placeholder="Notes to remember"></textarea>
 	</div>
 </template>
 
@@ -15,18 +15,22 @@ export default {
 	props:['notes'],
 	data(){
 		return{
-			isEditingNote: false
+			isEditingNote: false,
+			note: ''
 		}
 	},
+	created(){
+		this.note = this.notes
+	},
 	methods:{
-			startEditingNote(){
+		startEditingNote(){
 			this.isEditingNote = true
 			this.$nextTick(()=>{
 				this.$refs.noteArea.focus()
 			})
 		},
-		saveData(notes){
-			this.$emit('saveData', notes)
+		saveData(){
+			this.$emit('saveData', this.note)
 			this.isEditingNote = false
 		}
 	}

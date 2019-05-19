@@ -125,9 +125,9 @@ export default {
 				console.log(error)
 			})
 		},
-		saveFriendNote(friend, note){
+		saveFriendNote(note){
 			let formData = new FormData()
-			formData.append('friendID', friend.friend_fk)
+			formData.append('friendID', this.friendID)
 			formData.append('note', note)
 			fetch('/api/api-update-notes.php', {
 				method: 'POST',
@@ -136,6 +136,7 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
+				this.notes = note
 				console.log(json)
 				//check if its 1
 			}).catch(error => {
