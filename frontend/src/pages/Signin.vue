@@ -3,15 +3,24 @@
 		<input type="text" v-model="email" placeholder="Email">
 		<input type="password" v-model="userPassword" placeholder="Password" @keyup.enter="signInUser">
 		<button class="buttonswithArrow" @click="signInUser">Sign in <img class="arrow" src='../assets/icons/arrow-right-solid.svg'></button>
+		<FeedbackModal :message="feedbackMessage" :image="feedbackImage" v-if="isFeedbackModalOpen" @close="closeModal"></FeedbackModal>
 	</div>
 </template>
 
 <script>
+import FeedbackModal from '@/components/FeedbackModal.vue'
+
 export default {
+	components: {
+		FeedbackModal
+	},
 	data(){
 		return {
 			email: '',
-			userPassword: ''
+			userPassword: '',
+			isFeedbackModalOpen: false,
+			feedbackMessage:'',
+			feedbackImage: 0
 		}
 	},
 	methods: {
@@ -26,13 +35,21 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				this.$root.user = json.data
-				this.$router.push('/dashboard')
-				console.log(json)
+				if(json.status == 1){
+					this.$root.user = json.data
+					this.$router.push('/dashboard')
+				}
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
+		},
+		closeModal(){
+			this.isFeedbackModalOpen = false
 		}
 	}
 }
