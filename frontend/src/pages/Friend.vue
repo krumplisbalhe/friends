@@ -20,6 +20,7 @@
 				</div>
 			</div>
 			</div>
+			<FeedbackModal :message="feedbackMessage" :image="feedbackImage" v-if="isFeedbackModalOpen" @close="closeModal"></FeedbackModal>
 	</div>
 </template>
 
@@ -28,6 +29,7 @@ import FriendAbout from '@/components/FriendAbout.vue'
 import Keepintouch from '@/components/Keepintouch.vue'
 import Memories from '@/components/Memories.vue'
 import Notes from '@/components/Notes.vue'
+import FeedbackModal from '@/components/FeedbackModal.vue'
 
 export default {
 	name: 'dashboard',
@@ -35,7 +37,8 @@ export default {
 		FriendAbout,
 		Keepintouch,
 		Memories,
-		Notes
+		Notes,
+		FeedbackModal
 	},
 	data () {
 		return {
@@ -45,7 +48,10 @@ export default {
 			friendID:'',
 			memories: [],
 			contentToShow: 1,
-			notes:''
+			notes:'',
+			isFeedbackModalOpen: false,
+			feedbackMessage:'',
+			feedbackImage: 0
 		}
 	},
 	created(){
@@ -64,10 +70,15 @@ export default {
 			.then(res => res.json())
 			.then(json => {
 				console.log(json)
-				this.$router.push('/dashboard')
-				//check if its 1
+				if(json.status == 1){
+					this.$router.push('/dashboard')
+				}
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		},
@@ -78,15 +89,18 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				console.log(json)
-				//check if its 1
-				this.friend = json.data[0]
-				this.friendID = json.data[0].friend_fk
-				this.notes = json.data[0].note
-				this.imageFuck="http://localhost:9000/uploads/" + this.friend.image_url
-				console.log(this.friend.image_url)
+				if(json.status == 1){
+					this.friend = json.data[0]
+					this.friendID = json.data[0].friend_fk
+					this.notes = json.data[0].note
+					this.imageFuck="http://localhost:9000/uploads/" + this.friend.image_url
+				}
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		},
@@ -97,12 +111,15 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				console.log(json)
+				if(json.status == 1){
 				this.memories = json.data
-				console.log(this.memories)
-				//check if its 1
+				}
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		},
@@ -117,11 +134,15 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				console.log(json)
-				this.getFriendMemories()
-				//check if its 1
+				if(json.status == 1){
+					this.getFriendMemories()
+				}
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		},
@@ -136,11 +157,15 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				this.notes = note
-				console.log(json)
-				//check if its 1
+				if(json.status == 1){
+					this.notes = note
+				}
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+					}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		},
@@ -163,11 +188,12 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				console.log(json)
-				//check if its 1
-				// this.friend = json.data[0]
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		},
@@ -182,10 +208,15 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				console.log(json)
-				this.friend.image_url = json.data
+				if(json.status = 1){
+					this.friend.image_url = json.data
+				}
+				if(json.status = 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		},
@@ -201,11 +232,15 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				console.log(json)
-				this.getFriendMemories()
-				//check if its 1
+				if(json.status == 1){
+					this.getFriendMemories()
+				}
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		},
@@ -221,15 +256,20 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				this.friend.frequency = frequency
-				console.log(json)
-				// this.isEditingMemory=false
-				// getFriendMemories()
-				//check if its 1
+				if(json.status == 1){
+					this.friend.frequency = frequency
+				}
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
+		},
+		closeModal(){
+			this.isFeedbackModalOpen = false
 		}
 	}
 }

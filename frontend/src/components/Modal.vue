@@ -1,6 +1,6 @@
 <template>
 <div>
-	<div @click="closeModal" id="greyLayer">
+	<div @click="closeModal" class="greyLayer">
 	</div>
 	<div class="modal">
 		<input type="text" v-model="friend.firstName" placeholder="First name">
@@ -50,16 +50,6 @@ export default {
 
 <style scoped lang="stylus">
 @import '.././assets/variables.stylus.styl'
-
-#greyLayer
-	position fixed
-	top 0
-	left 0
-	width 100%
-	height 100%
-	background-color black
-	opacity 0.7
-	z-index 4
 
 .modal
 	z-index 5

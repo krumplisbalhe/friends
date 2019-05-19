@@ -53,10 +53,9 @@ export default {
       })
       .then(res => res.json())
       .then(json => {
-        if(json.status = 1){
+        if(json.status == 1){
           this.$root.user = json.data
         }
-        console.log(json)
       }).catch(error => {
         console.log(error)
       })
@@ -67,8 +66,9 @@ export default {
       })
       .then(res => res.json())
       .then(json => {
-        this.$root.user = ''
-        console.log(json)
+        if(json.status == 1){
+          this.$root.user = ''
+        }
       }).catch(error => {
         console.log(error)
       })

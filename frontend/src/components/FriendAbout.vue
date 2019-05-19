@@ -60,16 +60,16 @@ export default {
   props: ['friend'],
   data(){
     return{
-      isEditingFriendAbout: false
-    }
+			isEditingFriendAbout: false
+		}
   },
   methods:{
     deleteData(friend){
       this.$emit('deleteData', friend)
     },
     saveDataChanges(friend){
-      this.$emit('saveDataChanges', friend)
-      this.isEditingFriendAbout=false
+			this.$emit('saveDataChanges', friend)
+			this.isEditingFriendAbout = false
     },
     uploadData(e){
       this.$emit('uploadData', e)

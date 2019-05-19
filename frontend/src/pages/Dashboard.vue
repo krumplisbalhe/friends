@@ -17,21 +17,28 @@
 				<div class="name">{{friend.first_name}} {{friend.last_name}}</div>
 			</div>
 		</div>
+		<FeedbackModal :message="feedbackMessage" :image="feedbackImage" v-if="isFeedbackModalOpen" @close="closeFeedbackModal"></FeedbackModal>
 	</div>
 </template>
 
 <script>
 import Modal from '@/components/Modal.vue'
+import FeedbackModal from '@/components/FeedbackModal.vue'
+
 
 export default {
 	name: 'dashboard',
 	components: {
-		Modal
+		Modal,
+		FeedbackModal
 	},
 	data(){
 		return {
 			sortingCategory: 4,
-			modalIsOpen: false
+			modalIsOpen: false,
+			isFeedbackModalOpen: false,
+			feedbackMessage:'',
+			feedbackImage: 0
 		}
 	},
 	created(){
@@ -44,6 +51,9 @@ export default {
 		closeModal(){
 			this.modalIsOpen=false
 		},
+		closeFeedbackModal(){
+			this.isFeedbackModalOpen=false
+		},
 		getAllFriends(){
 			fetch('/api/api-get-all-friends.php', {
 				method: 'GET',
@@ -51,16 +61,19 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
-				console.log(json)
-				//check if its 1
-				this.$root.friends = json.data
+				if(json.status == 1){
+					this.$root.friends = json.data
+				}
+				if(json.status == 0){
+					this.isFeedbackModalOpen = true
+					this.feedbackMessage = json.message
+					this.feedbackImage = 0
+				}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		},
 		goToFriend(friend){
-			console.log(friend)
 			this.$router.push(`friend/${friend.id}`)
 		},
 		addFriend(friend){
@@ -79,11 +92,16 @@ export default {
 			})
 			.then(res => res.json())
 			.then(json => {
+			if(json.status == 1){
 				this.closeModal()
 				this.getAllFriends()
-				console.log(json)
+			}
+			if(json.status == 0){
+				this.isFeedbackModalOpen = true
+				this.feedbackMessage = json.message
+				this.feedbackImage = 0
+			}
 			}).catch(error => {
-
 				console.log(error)
 			})
 		}
@@ -121,5 +139,8 @@ export default {
 
 	.name
 		margin-right 40px
+
+.feedbackModal
+	align-self center
 
 </style>
