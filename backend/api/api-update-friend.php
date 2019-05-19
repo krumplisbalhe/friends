@@ -18,34 +18,40 @@ if( empty($friendID) ){
 //VALIDATE FIRST NAME
 $firstName = $_POST['firstName'] ?? '';
 if( strlen($firstName) > 20 ){
-  sendResponse(0, __LINE__, 'Name has to be max 20 characters');
+  sendResponse(0, __LINE__, 'Name has to be max 20 characters, the data has not been saved, please change it.');
 }
 
 //VALIDATE LAST NAME
 $lastName = $_POST['lastName'] ?? '';
 if( strlen($lastName) > 50 ){
-  sendResponse(0, __LINE__, 'Last name has to be max 50 characters');
+  sendResponse(0, __LINE__, 'Last name has to be max 50 characters, the data has not been saved, please change it.');
 }
 
 //VALIDATE EMAIL
 $email = $_POST['email'] ?? '';
+if( strlen($email) > 50 ){
+  sendResponse(0, __LINE__, 'Email has to be max 50 characters, the data has not been saved, please change it.');
+}
 
 //BIRTHDAY
 $birthday = $_POST['birthday'] ?? '';
 
 //ADDRESS
 $address = $_POST['address'] ?? '';
+if( strlen($address) > 50 ){
+  sendResponse(0, __LINE__, 'Address has to be max 50 characters, the data has not been saved, please change it.');
+}
 
 //PHONE NUMBER/S
 $phoneNumber = $_POST['phoneNumber'] ?? '';
 if( strlen($phoneNumber) > 15 ){
-  sendResponse(0, __LINE__, 'Phone number has to be max 15 characters');
+  sendResponse(0, __LINE__, 'Phone number has to be max 15 characters, the data has not been saved, please change it.');
 }
 
 //WORKPLACE
 $workplace = $_POST['workplace'] ?? '';
 if( strlen($phoneNumber) > 50 ){
-  sendResponse(0, __LINE__, 'Workplace has to be max 50 characters');
+  sendResponse(0, __LINE__, 'Workplace has to be max 50 characters, the data has not been saved, please change it.');
 }
 
 //CATEGORY

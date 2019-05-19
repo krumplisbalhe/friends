@@ -11,6 +11,10 @@ $userID = $_SESSION['userID'];
 
 //VALIDATE FIRST NAME
 $firstName = $_POST['firstName'] ?? '';
+if( empty($firstName) ){
+  sendResponse(0, __LINE__, 'Please add at least the first name of your friend');
+}
+
 if( strlen($firstName) > 20){
   sendResponse(0, __LINE__, 'First name has to be max 20 characters');
 }

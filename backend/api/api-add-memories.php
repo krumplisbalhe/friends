@@ -11,7 +11,7 @@ if( !isset ($_SESSION['userID']) ){
 $date = $_POST['date'] ?? '';
 $name = $_POST['name'] ?? '';
 if( strlen($name) > 50 ){
-  sendResponse(0, __LINE__, 'Name has to be max 50 characters');
+  sendResponse(0, __LINE__, 'Title of the memory has to be max 50 characters, the data has not been saved, please try again.');
 }
 
 $friendID = $_POST['friendID'];

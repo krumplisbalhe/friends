@@ -9,6 +9,10 @@ if( !isset ($_SESSION['userID']) ){
 }
 
 $note = $_POST['note'] ?? '';
+if( strlen($note) > 3000 ){
+  sendResponse(0, __LINE__, 'Note has to be max 3000 characters, the data has not been saved, please try again.');
+}
+
 $friendID = $_POST['friendID'];
 if( empty($friendID) ){
   sendResponse(0, __LINE__, 'Friend ID is missing, we couldnt update the notes.');

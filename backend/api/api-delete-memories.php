@@ -20,7 +20,7 @@ try{
   $stmt->execute();
 
   if( $stmt->rowCount() == 0 ){
-    sendResponse(1, __LINE__, 'Sorry the memories couldnt be deleted');
+    sendResponse(0, __LINE__, 'Sorry the memories couldnt be deleted');
   }
 
   sendResponse(1, __LINE__, 'Successfully deleted memory from the database');
