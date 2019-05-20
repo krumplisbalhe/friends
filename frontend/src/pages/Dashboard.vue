@@ -140,7 +140,4 @@ export default {
 	.name
 		margin-right 40px
 
-.feedbackModal
-	align-self center
-
 </style>
