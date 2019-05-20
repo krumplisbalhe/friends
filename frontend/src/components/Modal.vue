@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="modalContainer">
 	<div @click="closeModal" class="greyLayer">
 	</div>
 	<div class="modal">
@@ -50,6 +50,11 @@ export default {
 
 <style scoped lang="stylus">
 @import '.././assets/variables.stylus.styl'
+
+.modalContainer
+	display flex
+	align-items center
+	justify-content center
 
 .modal
 	z-index 5
