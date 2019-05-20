@@ -1,7 +1,5 @@
 <template>
 	<div>
-		<div @click="closeFeedbackModal" class="greyLayer">
-		</div>
 		<div class="feedbackModal" >
 			<img @click="closeFeedbackModal" class= "close" src="../assets/feedbacks/times-solid.svg">
 			<img class="feedback" v-if="image == 0" src="../assets/feedbacks/exclamation-triangle-solid.svg">
@@ -32,30 +30,32 @@ export default {
 
 .feedbackModal
 	position fixed
-	top 50%
 	left 33%
-	top 33%
+	top 220px
 	z-index 6
 	display flex
 	flex-direction column
 	align-items center
-	justify-content center
-	padding 0px 2% 2% 2%
-	background-color brandGrey
-	border white 1px solid
+	justify-content space-around
+	padding 10px 2% 2% 2%
+	background-color brandPink
 	color white
-	width 30vw
+	width 33%
 	overflow auto
-	height 30vh
+	height 200px
 	border-radius 25px
+	opacity 0.9
+
+	p
+		font-size 20px
+		text-align center
 
 	.feedback
-		width 50px
+		width 40px
 
 	.close
 		width 20px
 		align-self flex-end
-		padding-bottom 30px
 		cursor pointer
 
 </style>
