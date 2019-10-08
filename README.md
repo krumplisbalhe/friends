@@ -1,1 +1,3 @@
-# FriendTimacy friends manager/ friends CRM - http://friendtimacy.rita.wtf/
+# FriendTimacy
+friends manager/ friends CRM
+http://friendtimacy.rita.wtf/
