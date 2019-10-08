@@ -1,4 +1,4 @@
-# friendsmanager
+# FriendTimacy friendsmanager - http://friendtimacy.rita.wtf/
 
 ## Project setup
 ```
