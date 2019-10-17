@@ -5,9 +5,17 @@
 start XAMPP app
 
 General -> Start
+
+
 Services -> Apache -> Start
+
+
 				 -> MySQL -> Start
+
+
 Network -> Localhost:8080 -> Enable
+
+
 Volumes -> Mount
 
 PHP Myadmin and your database is now accessible here: http://localhost:8080/phpmyadmin/
