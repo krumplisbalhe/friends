@@ -10,7 +10,7 @@ General -> Start
 Services -> Apache -> Start
 
 
-				 -> MySQL -> Start
+Services -> MySQL -> Start
 
 
 Network -> Localhost:8080 -> Enable
